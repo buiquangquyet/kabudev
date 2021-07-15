@@ -125,12 +125,6 @@
 
                                         <div class="col-12 price">
                                             @include ('shop::products.price', ['product' => $product])
-
-                                            @if (Webkul\Tax\Helpers\Tax::isTaxInclusive() && $product->getTypeInstance()->getTaxCategory())
-                                                <span>
-                                                    {{ __('velocity::app.products.tax-inclusive') }}
-                                                </span>
-                                            @endif
                                         </div>
 
                                         @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
@@ -210,6 +204,19 @@
             <div class="related-products">
                 @include('shop::products.view.related-products')
                 @include('shop::products.view.up-sells')
+            </div>
+
+            <div class="store-meta-images col-3">
+                @if(
+                    isset($velocityMetaData['product_view_images'])
+                    && $velocityMetaData['product_view_images']
+                )
+                    @foreach (json_decode($velocityMetaData['product_view_images'], true) as $image)
+                        @if ($image && $image !== '')
+                            <img src="{{ url()->to('/') }}/storage/{{ $image }}" alt=""/>
+                        @endif
+                    @endforeach
+                @endif
             </div>
         </div>
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}

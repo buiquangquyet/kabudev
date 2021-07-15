@@ -34,13 +34,6 @@ class SmartButton extends Paypal
     protected $code  = 'paypal_smart_button';
 
     /**
-     * Paypal partner attribution id.
-     *
-     * @var string
-     */
-    protected $paypalPartnerAttributionId = 'Bagisto_Cart';
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -70,7 +63,6 @@ class SmartButton extends Paypal
     public function createOrder($body)
     {
         $request = new OrdersCreateRequest;
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
         $request->prefer('return=representation');
         $request->body = $body;
         return $this->client()->execute($request);
@@ -85,7 +77,6 @@ class SmartButton extends Paypal
     public function captureOrder($orderId)
     {
         $request = new OrdersCaptureRequest($orderId);
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
         $request->prefer('return=representation');
         $this->client()->execute($request);
     }
@@ -121,7 +112,6 @@ class SmartButton extends Paypal
     public function refundOrder($captureId, $body = [])
     {
         $request = new CapturesRefundRequest($captureId);
-        $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
         $request->body = $body;
         return $this->client()->execute($request);
     }

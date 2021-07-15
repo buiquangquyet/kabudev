@@ -28,11 +28,7 @@
 
                 @if ($order->canCancel())
                     <span class="account-action">
-                        <form id="cancelOrderForm" action="{{ route('customer.orders.cancel', $order->id) }}" method="post">
-                            @csrf
-                        </form>
-
-                        <a href="javascript:void(0);" class="theme-btn light unset float-right" onclick="cancelOrder('{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}')" style="float: right">
+                        <a href="{{ route('customer.orders.cancel', $order->id) }}" class="theme-btn light unset float-right" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right">
                             {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                         </a>
                     </span>
@@ -233,7 +229,7 @@
 
                                 <div class="sale-section">
                                     <div class="section-title">
-                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}</span>
+                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->id]) }}</span>
 
                                         <a href="{{ route('customer.orders.print', $invoice->id) }}" class="float-right">
                                             {{ __('shop::app.customer.account.order.view.print') }}
@@ -584,15 +580,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        function cancelOrder(message) {
-            if (! confirm(message)) {
-                return;
-            }
-
-            $('#cancelOrderForm').submit();
-        }
-    </script>
-@endpush

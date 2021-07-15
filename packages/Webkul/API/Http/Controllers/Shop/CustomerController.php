@@ -2,11 +2,11 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use Webkul\Customer\Http\Requests\CustomerRegistrationRequest;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerController extends Controller
 {
@@ -70,9 +70,14 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CustomerRegistrationRequest $request)
+    public function create(Request $request)
     {
-        $request->validated();
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name'  => 'required',
+            'email'      => 'email|required|unique:customers,email',
+            'password'   => 'confirmed|min:6|required',
+        ]);
 
         $data = [
             'first_name'  => $request->get('first_name'),

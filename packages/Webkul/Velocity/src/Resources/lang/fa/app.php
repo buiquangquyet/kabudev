@@ -99,7 +99,7 @@ return [
             'sidebar-categories' => 'دسته بندی های نوار کناری',
             'header_content_count' => 'Header Content Count',
             'footer-left-raw-content' => '<p>ما دوست داریم که نرم افزارهایی را تهیه کرده و مشکلات دنیای واقعی را با باینری حل کنیم. ما به اهداف خود بسیار متعهد هستیم. ما منابع خود را برای ایجاد کلاس های نرم افزاری و برنامه های کاربردی برای تجارت سازمانی با درجه برتر ، در لبه تخصص فناوری سرمایه گذاری می کنیم..</p>',
-            'slider-path' => 'مسیر اسلاید',
+            'slider-path' => 'مسیر کشویی',
             'category-logo' => 'آرم دسته',
             'product-policy' => 'خط مشی محصول',
             'update-meta-data' => 'Meta Data به روز رسانی',
@@ -148,7 +148,7 @@ return [
             'mass-delete-success' => 'منوی دسته انتخاب شده با موفقیت حذف شد.',
         ],
         'general' => [
-            'locale_logo' => 'لوگوی منطقه',
+            'locale_logo' => 'لوگوی محلی',
         ],
     ],
 
@@ -164,7 +164,8 @@ return [
 
     'header' => [
         'cart' => 'سبد خرید',
-         'guest' => 'مهمان',
+        'cart' => 'سبد خرید',
+        'guest' => 'مهمان',
         'logout' => 'خروج',
         'title' => 'حساب',
         'account' => 'حساب',
@@ -263,7 +264,6 @@ return [
         'short-description' => 'توضیحات کوتاه',
         'recently-viewed' => 'محصولات اخیرا مشاهده شده',
         'be-first-review' => 'اولین نفری باشید که نظر می دهد',
-        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     'shop' => [

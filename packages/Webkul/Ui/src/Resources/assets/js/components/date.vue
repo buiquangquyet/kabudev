@@ -2,9 +2,9 @@
     <span>
         <slot>
             <input
-                class="control"
                 type="text"
                 :name="name"
+                class="control"
                 :value="value"
                 data-input
             />
@@ -28,53 +28,46 @@ export default {
 
         value: String,
 
-        disable: Array,
-
         minDate: String,
 
         maxDate: String,
 
-        hideRemoveButton: [Number, String]
+        hideRemoveButton: [Number, String],
     },
 
-    data: function() {
+    data() {
         return {
-            datepicker: null
+            datepicker: null,
         };
     },
 
-    mounted: function() {
-        let options = this.setOptions();
+    mounted() {
+        var this_this = this;
+        var options = {
+            allowInput: true,
+            altFormat: "Y-m-d",
+            dateFormat: "Y-m-d",
+            weekNumbers: true,
+            onChange: function(selectedDates, dateStr, instance) {
+                this_this.$emit("onChange", dateStr);
+            },
+        };
 
-        this.activate(options);
-    },
-
-    methods: {
-        setOptions: function() {
-            let self = this;
-
-            return {
-                allowInput: true,
-                disable: this.disable ?? [],
-                minDate: this.minDate ?? '',
-                maxDate: this.maxDate ?? '',
-                altFormat: "Y-m-d",
-                dateFormat: "Y-m-d",
-                weekNumbers: true,
-                onChange: function(selectedDates, dateStr, instance) {
-                    self.$emit("onChange", dateStr);
-                }
-            };
-        },
-
-        activate: function(options) {
-            let element = this.$el.getElementsByTagName("input")[0];
-            this.datepicker = new Flatpickr(element, options);
-        },
-
-        clear: function() {
-            this.datepicker.clear();
+        if (this.minDate) {
+            options.minDate = this.minDate;
         }
-    }
+
+        if (this.maxDate) {
+            options.maxDate = this.maxDate;
+        }
+
+        var element = this.$el.getElementsByTagName("input")[0];
+        this.datepicker = new Flatpickr(element, options);
+    },
+    methods: {
+        clear() {
+            this.datepicker.clear();
+        },
+    },
 };
 </script>

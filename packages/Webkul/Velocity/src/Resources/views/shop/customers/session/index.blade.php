@@ -91,12 +91,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-
-                                {!! Captcha::render() !!}
-
-                            </div>
-
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
 
                             <input class="theme-btn" type="submit" value="{{ __('shop::app.customer.login-form.button_title') }}">
@@ -109,9 +103,3 @@
         {!! view_render_event('bagisto.shop.customers.login.after') !!}
     </div>
 @endsection
-
-@push('scripts')
-
-{!! Captcha::renderJS() !!}
-
-@endpush

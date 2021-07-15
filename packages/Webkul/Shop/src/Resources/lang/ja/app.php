@@ -251,14 +251,11 @@ return [
                     'submit' => '保存する',
                     'success' => '住所が更新されました',
                 ],
-
                 'delete' => [
                     'success' => '住所が削除されました',
                     'failure' => '住所の削除に失敗しました。',
                     'wrong-password' => 'パスワードが正しくありません'
-                ],
-
-                'default-address' => 'Default Address',
+                ]
             ],
 
             'order' => [
@@ -310,8 +307,6 @@ return [
                     'invoice-id' => '領収書番号',
                     'order-id' => '注文番号',
                     'order-date' => '注文日',
-                    'invoice-date' => '請求書の日付',
-                    'payment-terms' => '支払い条件',
                     'bill-to' => '請求先',
                     'ship-to' => '送り先',
                     'contact' => '連絡先',
@@ -369,16 +364,7 @@ return [
 
                 'view' => [
                     'page-tile' => 'レビュー #:id',
-                ],
-
-                'delete' => [
-                    'confirmation-message' => 'このレビューを削除してもよろしいですか？',
-                ],
-
-                'delete-all' => [
-                    'title' => 'すべて削除',
-                    'confirmation-message' => 'すべてのレビューを削除してもよろしいですか？',
-                ],
+                ]
             ]
         ]
     ],
@@ -425,7 +411,6 @@ return [
         'compare_options' => 'Compare Options',
         'wishlist-options' => 'Wishlist Options',
         'offers' => 'Buy :qty for :price each and save :discount%',
-        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     'buynow' => [
@@ -473,7 +458,7 @@ return [
             'cart-remove-action' => '手続きを進めますか。',
             'partial-cart-update' => 'Only some of the product(s) were updated',
             'link-missing' => '',
-            'minimum-order-message' => '最小注文額は :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

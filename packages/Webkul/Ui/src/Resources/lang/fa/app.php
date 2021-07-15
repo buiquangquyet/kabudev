@@ -12,20 +12,11 @@ return [
             'delete-category-product' => 'The selected categories contains products. Performing this action will remove the related products. Do you really want to perform this action?'
         ],
 
-        'error' => [
-            'multiple-sort-keys-error' => 'Fatal Error! Multiple sort keys found, please resolve the URL manually',
-            'multiple-search-keys-error' => 'Multiple search keys found, please resolve the URL manually',
-        ],
-
         'zero-index' => 'ستون های فهرست می توانند مقادیری بیشتر از صفر داشته باشند',
         'no-records' => 'هیچ رکوردی یافت نشد',
         'filter-fields-missing' => 'برخی از زمینه های مورد نیاز خالی است ، لطفا ستون ، شرایط و ارزش را به درستی بررسی کنید',
         'click_on_action' => 'آیا واقعاً می خواهید این عمل را انجام دهید؟',
         'search' => 'جستجو در اینجا ...',
-        'search-title' => 'جستجو کردن',
-        'channel' => 'کانال',
-        'locale' => 'محلی',
-        'customer-group' => 'گروه مشتریان',
         'filter' => 'فیلتر',
         'column' => 'انتخاب ستون',
         'condition' => 'انتخاب شرایط',
@@ -45,9 +36,6 @@ return [
         'items-per-page' => 'موارد در هر صفحه',
         'value-here' => 'ارزش در اینجا',
         'numeric-value-here' => 'ارزش عددی در اینجا',
-        'submit' => 'ارسال',
-        'edit' => 'ویرایش کنید',
-        'delete' => 'حذف',
-        'view' => 'چشم انداز',
+        'submit' => 'ارسال'
     ]
 ];

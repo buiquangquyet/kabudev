@@ -5,9 +5,14 @@
 @stop
 
 @php
-    $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-    $channel = core()->getRequestedChannelCode();
-    $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
+    $locale = request()->get('locale') ?: app()->getLocale();
+    $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+    $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+    if (! $channelLocales->contains('code', $locale)) {
+        $locale = config('app.fallback_locale');
+    }
 @endphp
 
 @section('content')
@@ -69,10 +74,7 @@
             <accordian :title="'{{ __('velocity::app.admin.meta-data.general') }}'" :active="true">
                 <div slot="body">
                     <div class="control-group">
-                        <label style="width:100%;">
-                            {{ __('velocity::app.admin.meta-data.activate-slider') }}
-                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
-                        </label>
+                        <label>{{ __('velocity::app.admin.meta-data.activate-slider') }}</label>
 
                         <label class="switch">
                             <input
@@ -88,10 +90,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">
-                            {{ __('velocity::app.admin.meta-data.sidebar-categories') }}
-                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
-                        </label>
+                        <label>{{ __('velocity::app.admin.meta-data.sidebar-categories') }}</label>
 
                         <input
                             type="number"
@@ -103,10 +102,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label style="width:100%;">
-                            {{ __('velocity::app.admin.meta-data.header_content_count') }}
-                            <span class="locale">[{{ $channel }} - {{ $locale }}]</span>
-                        </label>
+                        <label>{{ __('velocity::app.admin.meta-data.header_content_count') }}</label>
 
                         <input
                             type="number"

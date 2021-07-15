@@ -33,12 +33,11 @@ return [
         'default' => 'exchange_rates',
 
         'fixer' => [
-            'key' => env('FIXER_API_KEY'),
+            'key' => env('fixer_api_key'),
             'class' => 'Webkul\Core\Helpers\Exchange\FixerExchange'
         ],
 
         'exchange_rates' => [
-            'key' => env('EXCHANGE_RATES_API_KEY'),
             'class' => 'Webkul\Core\Helpers\Exchange\ExchangeRates'
         ],
     ],

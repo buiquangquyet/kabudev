@@ -2,7 +2,7 @@
     $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
-    $locale = core()->getRequestedLocaleCode();
+    $locale = request()->get('locale') ?: app()->getLocale();
 
     $attributeOptionTranslations = app('\Webkul\Attribute\Repositories\AttributeOptionTranslationRepository')->where('locale', $locale)->get()->toJson();
 @endphp
@@ -116,11 +116,6 @@
                                                 <span v-else class="fs16">__</span>
                                                 @break;
 
-                                            @case('multiselect')
-                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'multiple')" class="fs16"></span>
-                                                <span v-else class="fs16">__</span>
-                                                @break
-
                                             @case ('file')
                                             @case ('image')
                                                 <a :href="`${$root.baseUrl}/${product.url_key}`" class="unset">
@@ -220,8 +215,6 @@
                             } else {
                                 this.$set(this, 'products', this.products.filter(product => product.id != productId));
                             }
-
-                            this.$root.headerItemsCount++;
 
                             window.showAlert(`alert-${response.data.status}`, response.data.label, response.data.message);
                         })

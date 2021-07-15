@@ -79,9 +79,7 @@ class ProductController extends Controller
             'attribute_id' => $attributeId,
         ]);
 
-        return isset($productAttribute['text_value'])
-            ? Storage::download($productAttribute['text_value'])
-            : null;
+        return Storage::download($productAttribute['text_value']);
     }
 
     /**
@@ -96,11 +94,7 @@ class ProductController extends Controller
                 $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
 
                 if ($productDownloadableLink->sample_type == 'file') {
-                    $privateDisk = Storage::disk('private');
-
-                    return $privateDisk->exists($productDownloadableLink->sample_file)
-                        ? $privateDisk->download($productDownloadableLink->sample_file)
-                        : abort(404);
+                    return Storage::download($productDownloadableLink->sample_file);
                 } else {
                     $fileName = $name = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
 

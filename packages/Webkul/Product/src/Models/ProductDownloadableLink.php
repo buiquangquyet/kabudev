@@ -75,7 +75,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     {
         $array = parent::toArray();
 
-        $translation = $this->translate(core()->getRequestedLocaleCode());
+        $translation = $this->translate(request()->get('locale') ?: app()->getLocale());
 
         $array['title'] = $translation ? $translation->title : '';
 

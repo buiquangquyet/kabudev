@@ -233,23 +233,6 @@ class Core
     }
 
     /**
-     * Get channel code from request.
-     *
-     * @param  bool  $fallback  optional
-     * @return string
-     */
-    public function getRequestedChannelCode($fallback = true)
-    {
-        $channelCode = request()->get('channel');
-
-        if (! $fallback) {
-            return $channelCode;
-        }
-
-        return $channelCode ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
-    }
-
-    /**
      * Returns the channel name.
      *
      * @return string
@@ -262,7 +245,7 @@ class Core
     }
 
     /**
-     * Return all locales.
+     * Returns all locales
      *
      * @return \Illuminate\Support\Collection
      */
@@ -275,27 +258,6 @@ class Core
         }
 
         return $locales = $this->localeRepository->all();
-    }
-
-    /**
-     * Return all locales which are present in requested channel.
-     *
-     * @return array
-     */
-    public function getAllLocalesByRequestedChannel()
-    {
-        static $data = [];
-
-        if (! empty($data)) {
-            return $data;
-        }
-
-        $channel = $this->channelRepository->findOneByField('code', $this->getRequestedChannelCode());
-
-        return $data = [
-            'channel' => $channel,
-            'locales' => $channel->locales
-        ];
     }
 
     /**
@@ -321,42 +283,6 @@ class Core
     }
 
     /**
-     * Get locale code from request. Here if you want to use admin locale,
-     * you can pass it as an argument.
-     *
-     * @param  string  $localeKey  optional
-     * @param  bool  $fallback  optional
-     * @return string
-     */
-    public function getRequestedLocaleCode($localeKey = 'locale', $fallback = true)
-    {
-        $localeCode = request()->get($localeKey);
-
-        if (! $fallback) {
-            return $localeCode;
-        }
-
-        return $localeCode ?: app()->getLocale();
-    }
-
-    /**
-     * Check requested locale code in requested channel. If not found,
-     * then set channel default locale code.
-     *
-     * @return string
-     */
-    public function checkRequestedLocaleCodeInRequestedChannel()
-    {
-        $localeCode = $this->getRequestedLocaleCode();
-
-        $channelLocales = $this->getAllLocalesByRequestedChannel();
-
-        return ! $channelLocales['locales']->contains('code', $localeCode)
-            ? $channelLocales['channel']->default_locale->code
-            : $localeCode;
-    }
-
-    /**
      * Returns all customer groups.
      *
      * @return \Illuminate\Support\Collection
@@ -370,16 +296,6 @@ class Core
         }
 
         return $customerGroups = $this->customerGroupRepository->all();
-    }
-
-    /**
-     * Get requested customer group code.
-     *
-     * @return null|string
-     */
-    public function getRequestedCustomerGroupCode()
-    {
-        return request()->get('customer_group');
     }
 
     /**
@@ -816,11 +732,11 @@ class Core
             $coreConfigValue = $loadedConfigs[$field];
         } else {
             if (null === $channel) {
-                $channel = $this->getRequestedChannelCode();
+                $channel = request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
             }
 
             if (null === $locale) {
-                $locale = $this->getRequestedLocaleCode();
+                $locale = request()->get('locale') ?: app()->getLocale();
             }
 
             $loadedConfigs[$field] = $coreConfigValue = $this->getCoreConfigValue($field, $channel, $locale);
@@ -1172,9 +1088,9 @@ class Core
      */
     public function getSenderEmailDetails()
     {
-        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ? $this->getConfigData('emails.configure.email_settings.sender_name') : config('mail.from.name');
+        $sender_name = $this->getConfigData('general.general.email_settings.sender_name') ? $this->getConfigData('general.general.email_settings.sender_name') : config('mail.from.name');
 
-        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ? $this->getConfigData('emails.configure.email_settings.shop_email_from') : config('mail.from.address');
+        $sender_email = $this->getConfigData('general.general.email_settings.shop_email_from') ? $this->getConfigData('general.general.email_settings.shop_email_from') : config('mail.from.address');
 
         return [
             'name'  => $sender_name,

@@ -10,7 +10,7 @@
     <div style="padding: 30px;">
         <div style="font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 34px;">
             <span style="font-weight: bold;">
-                {{ __('shop::app.mail.invoice.heading', ['order_id' => $order->increment_id, 'invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
+                {{ __('shop::app.mail.invoice.heading', ['order_id' => $order->increment_id, 'invoice_id' => $invoice->id]) }}
             </span> <br>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
@@ -47,19 +47,11 @@
                     </div>
 
                     <div>
-                        {{ $order->shipping_address->address1 }}
+                        {{ $order->shipping_address->address1 }}, {{ $order->shipping_address->state }}
                     </div>
 
                     <div>
-                        {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
-                    </div>
-
-                    <div>
-                        {{ $order->shipping_address->state }}
-                    </div>
-
-                    <div>
-                        {{ core()->country_name($order->shipping_address->country) }}
+                        {{ core()->country_name($order->shipping_address->country) }} {{ $order->shipping_address->postcode }}
                     </div>
 
                     <div>---</div>
@@ -92,19 +84,11 @@
                 </div>
 
                 <div>
-                    {{ $order->billing_address->address1 }}
+                    {{ $order->billing_address->address1 }}, {{ $order->billing_address->state }}
                 </div>
 
                 <div>
-                    {{ $order->billing_address->postcode . " " . $order->billing_address->city }}
-                </div>
-
-                <div>
-                    {{ $order->billing_address->state }}
-                </div>
-
-                <div>
-                    {{ core()->country_name($order->billing_address->country) }}
+                    {{ core()->country_name($order->billing_address->country) }} {{ $order->billing_address->postcode }}
                 </div>
 
                 <div>---</div>

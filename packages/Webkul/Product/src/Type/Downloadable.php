@@ -34,7 +34,7 @@ class Downloadable extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['length', 'width', 'height', 'weight', 'guest_checkout'];
+    protected $skipAttributes = ['width', 'height', 'depth', 'weight', 'guest_checkout'];
 
     /**
      * These blade files will be included in product edit page
@@ -287,15 +287,5 @@ class Downloadable extends AbstractType
         $item->save();
 
         return $result;
-    }
-
-    /**
-     * Get product maximam price
-     *
-     * @return float
-     */
-    public function getMaximamPrice()
-    {
-        return $this->product->price;
     }
 }

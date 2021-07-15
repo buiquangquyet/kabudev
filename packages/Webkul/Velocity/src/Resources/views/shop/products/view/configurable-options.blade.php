@@ -3,7 +3,6 @@
     @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
 
     @php
-        $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
         $config = $configurableOptionHelper->getConfigurationConfig($product);
         $galleryImages = productimage()->getGalleryImages($product);
     @endphp
@@ -21,7 +20,7 @@
                     type="hidden"
                     :value="selectedProductId"
                     id="selected_configurable_option"
-                    name="selected_configurable_option"/>
+                    name="selected_configurable_option" />
 
                 <div
                     :key="index"
@@ -44,18 +43,16 @@
                             :disabled="attribute.disabled"
                             :id="['attribute_' + attribute.id]"
                             :name="['super_attribute[' + attribute.id + ']']"
-                            @change="configure(attribute, $event.target.value)"
+                            @change="configure(attribute, $event.target.value, $event)"
                             :data-vv-as="'&quot;' + attribute.label + '&quot;'">
 
                             <option
                                 :value="option.id"
-                                v-for='(option, index) in attribute.options'
-                                :selected="index == attribute.selectedIndex">
+                                v-for='(option, index) in attribute.options'>
                                 @{{ option.label }}
                             </option>
 
                         </select>
-
                         <div class="select-icon-container">
                             <span class="select-icon rango-arrow-down"></span>
                         </div>
@@ -75,8 +72,7 @@
                                 :name="['super_attribute[' + attribute.id + ']']"
                                 :id="['attribute_' + attribute.id + '_option_' + option.id]"
                                 :data-vv-as="'&quot;' + attribute.label + '&quot;'"
-                                @change="configure(attribute, $event.target.value)"
-                                :checked="index == attribute.selectedIndex">
+                                @change="configure(attribute, $event.target.value)"/>
 
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
@@ -101,76 +97,52 @@
 
         <script type="text/javascript">
             (() => {
-                let galleryImages = @json($galleryImages);
+                var galleryImages = @json($galleryImages);
 
                 Vue.component('product-options', {
                     template: '#product-options-template',
-
                     inject: ['$validator'],
-
                     data: function() {
                         return {
-                            defaultVariant: @json($defaultVariant),
-
-                            config: @json($config),
-
                             galleryImages: [],
-
                             simpleProduct: null,
-
                             childAttributes: [],
-
                             selectedProductId: '',
+                            config: @json($config),
                         }
                     },
 
-                    mounted: function () {
-                        this.init();
+                    created: function() {
+                        var config = @json($config);
 
-                        this.initDefaultSelection();
+                        var childAttributes = this.childAttributes,
+                            attributes = config.attributes.slice(),
+                            index = attributes.length,
+                            attribute;
+
+                        while (index--) {
+                            attribute = attributes[index];
+
+                            attribute.options = [];
+
+                            if (index) {
+                                attribute.disabled = true;
+                            } else {
+                                this.fillSelect(attribute);
+                            }
+
+                            attribute = Object.assign(attribute, {
+                                childAttributes: childAttributes.slice(),
+                                prevAttribute: attributes[index - 1],
+                                nextAttribute: attributes[index + 1]
+                            });
+
+                            childAttributes.unshift(attribute);
+                        }
                     },
 
                     methods: {
-                        init: function () {
-                            let config = @json($config);
-
-                            let childAttributes = this.childAttributes,
-                                attributes = config.attributes.slice(),
-                                index = attributes.length,
-                                attribute;
-
-                            while (index--) {
-                                attribute = attributes[index];
-
-                                attribute.options = [];
-
-                                if (index) {
-                                    attribute.disabled = true;
-                                } else {
-                                    this.fillSelect(attribute);
-                                }
-
-                                attribute = Object.assign(attribute, {
-                                    childAttributes: childAttributes.slice(),
-                                    prevAttribute: attributes[index - 1],
-                                    nextAttribute: attributes[index + 1]
-                                });
-
-                                childAttributes.unshift(attribute);
-                            }
-                        },
-
-                        initDefaultSelection: function() {
-                            if (this.defaultVariant) {
-                                this.childAttributes.forEach((attribute) => {
-                                    let attributeValue = this.defaultVariant[attribute.code];
-
-                                    this.configure(attribute, attributeValue);
-                                });
-                            }
-                        },
-
-                        configure: function(attribute, value) {
+                        configure: function(attribute, value, event) {
                             this.simpleProduct = this.getSelectedProductId(attribute, value);
 
                             if (value) {
@@ -196,7 +168,7 @@
                         },
 
                         getSelectedIndex: function(attribute, value) {
-                            let selectedIndex = 0;
+                            var selectedIndex = 0;
 
                             attribute.options.forEach(function(option, index) {
                                 if (option.id == value) {
@@ -208,7 +180,7 @@
                         },
 
                         getSelectedProductId: function(attribute, value) {
-                            let options = attribute.options,
+                            var options = attribute.options,
                                 matchedOptions;
 
                             matchedOptions = options.filter(function (option) {
@@ -223,12 +195,12 @@
                         },
 
                         fillSelect: function(attribute) {
-                            let options = this.getAttributeOptions(attribute.id);
-                            let prevOption;
-                            let index = 1;
-                            let allowedProducts;
-                            let i;
-                            let j;
+                            var options = this.getAttributeOptions(attribute.id);
+                            var prevOption;
+                            var index = 1;
+                            var allowedProducts;
+                            var i;
+                            var j;
 
                             this.clearSelect(attribute)
 
@@ -280,13 +252,13 @@
                                 || attribute.swatch_type == ''
                                 || attribute.swatch_type == 'dropdown'
                             ) {
-                                let element = document.getElementById(`attribute_${attribute.id}`);
+                                var element = document.getElementById(`attribute_${attribute.id}`);
 
                                 if (element) {
                                     element.selectedIndex = "0";
                                 }
                             } else {
-                                let elements = document.getElementsByName(`super_attribute[${attribute.id}]`);
+                                var elements = document.getElementsByName(`super_attribute[${attribute.id}]`);
 
                                 elements.forEach(function(element) {
                                     element.checked = false;
@@ -295,7 +267,7 @@
                         },
 
                         getAttributeOptions: function (attributeId) {
-                            let options;
+                            var options;
 
                             this.config.attributes.forEach(function(attribute, index) {
                                 if (attribute.id == attributeId) {
@@ -307,7 +279,7 @@
                         },
 
                         reloadPrice: function () {
-                            let selectedOptionCount = 0;
+                            var selectedOptionCount = 0;
 
                             this.childAttributes.forEach(function(attribute) {
                                 if (attribute.selectedIndex) {
@@ -315,9 +287,9 @@
                                 }
                             });
 
-                            let priceLabelElement = document.querySelector('.price-label');
-                            let priceElement = document.querySelector('.final-price');
-                            let regularPriceElement = document.querySelector('.regular-price');
+                            var priceLabelElement = document.querySelector('.price-label');
+                            var priceElement = document.querySelector('.final-price');
+                            var regularPriceElement = document.querySelector('.regular-price');
 
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
@@ -347,11 +319,11 @@
 
                             if (this.simpleProduct) {
                                 this.config.variant_images[this.simpleProduct].forEach(function(image) {
-                                    galleryImages.push(image)
+                                    galleryImages.unshift(image)
                                 });
 
                                 this.config.variant_videos[this.simpleProduct].forEach(function(video) {
-                                    galleryImages.push(video)
+                                    galleryImages.unshift(video)
                                 });
                             }
 
@@ -365,7 +337,7 @@
                         },
 
                         changeStock: function (productId) {
-                            let inStockElement = document.querySelector('.disable-box-shadow');
+                            var inStockElement = document.querySelector('.disable-box-shadow');
 
                             if (productId) {
                                 inStockElement.style.display= "block";
@@ -375,7 +347,7 @@
                         },
                     }
                 });
-            })();
+            })()
         </script>
     @endpush
 @endif

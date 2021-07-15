@@ -25,9 +25,9 @@ abstract class AbstractProduct
      */
     public function applyChannelLocaleFilter($attribute, $qb, $alias = 'product_attribute_values')
     {
-        $channel = core()->getRequestedChannelCode();
+        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-        $locale = core()->getRequestedLocaleCode();
+        $locale = request()->get('locale') ?: app()->getLocale();
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {

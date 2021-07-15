@@ -3,43 +3,41 @@
 namespace Webkul\Core\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Contracts\CoreConfig;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Traits\CoreConfigField;
 use Prettus\Repository\Traits\CacheableRepository;
 
 class CoreConfigRepository extends Repository
 {
-    use CoreConfigField, CacheableRepository;
+    use CacheableRepository;
 
     /**
-     * Specify model class name.
+     * Specify Model class name
      *
-     * @return string
+     * @return mixed
      */
-    function model(): string
+    function model()
     {
-        return CoreConfig::class;
+        return 'Webkul\Core\Contracts\CoreConfig';
     }
 
     /**
-     * Create.
-     *
      * @param  array  $data
      * @return \Webkul\Core\Contracts\CoreConfig
      */
     public function create(array $data)
     {
-        if ($data['locale'] || $data['channel']) {
-            $locale = $data['locale'];
-            $channel = $data['channel'];
+        unset($data['_token']);
 
-            unset($data['locale']);
-            unset($data['channel']);
+        if ($data['locale'] || $data['channel']) {
+           $locale = $data['locale'];
+           $channel = $data['channel'];
+
+           unset($data['locale']);
+           unset($data['channel']);
         }
 
         foreach ($data as $method => $fieldData) {
-            $recurssiveData = $this->recuressiveArray($fieldData, $method);
+            $recurssiveData = $this->recuressiveArray($fieldData , $method);
 
             foreach ($recurssiveData as $fieldName => $value) {
                 $field = core()->getConfigField($fieldName);
@@ -93,7 +91,7 @@ class CoreConfigRepository extends Repository
                     foreach ($coreConfigValue as $coreConfig) {
                         Storage::delete($coreConfig['value']);
 
-                        if (isset($value['delete'])) {
+                        if(isset($value['delete'])) {
                             $this->model->destroy($coreConfig['id']);
                         } else {
                             $coreConfig->update([
@@ -110,14 +108,11 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * Recursive array.
-     *
      * @param  array  $formData
      * @param  string  $method
      * @return array
      */
-    public function recuressiveArray(array $formData, $method)
-    {
+    public function recuressiveArray(array $formData, $method) {
         static $data = [];
 
         static $recuressiveArrayData = [];
@@ -152,11 +147,11 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * Return dimension of the array.
+     * Return dimension of array
      *
      * @param  array  $array
      * @return int
-     */
+    */
     public function countDim($array)
     {
         if (is_array(reset($array))) {

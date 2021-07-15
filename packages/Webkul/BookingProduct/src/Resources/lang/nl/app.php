@@ -63,8 +63,7 @@ return [
                 'day' => 'Dag',
                 'status' => 'Toestand',
                 'open' => 'Open',
-                'close' => 'Dichtbij',
-                'time-error' => 'The to time must be greater than the from time.'
+                'close' => 'Dichtbij'
             ]
         ]
     ],

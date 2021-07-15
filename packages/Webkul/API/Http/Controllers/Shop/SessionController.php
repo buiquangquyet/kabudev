@@ -3,9 +3,8 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\API\Http\Resources\Customer\Customer as CustomerResource;
-use Webkul\Customer\Http\Requests\CustomerLoginRequest;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\API\Http\Resources\Customer\Customer as CustomerResource;
 
 class SessionController extends Controller
 {
@@ -46,19 +45,22 @@ class SessionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CustomerLoginRequest $request)
+    public function create()
     {
-        $request->validated();
+        request()->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+        ]);
 
         $jwtToken = null;
 
-        if (! $jwtToken = auth()->guard($this->guard)->attempt($request->only(['email', 'password']))) {
+        if (! $jwtToken = auth()->guard($this->guard)->attempt(request()->only('email', 'password'))) {
             return response()->json([
                 'error' => 'Invalid Email or Password',
             ], 401);
         }
 
-        Event::dispatch('customer.after.login', $request->get('email'));
+        Event::dispatch('customer.after.login', request('email'));
 
         $customer = auth($this->guard)->user();
 

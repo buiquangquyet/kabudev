@@ -3,9 +3,9 @@
     $locales = core()->getAllLocales();
 
     /* request and fallback handling */
-    $locale = core()->getRequestedLocaleCode();
-    $channel = core()->getRequestedChannelCode();
-    $customer_group = core()->getRequestedCustomerGroupCode();
+    $locale = request()->get('locale') ?: app()->getLocale();
+    $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+    $customer_group = request()->get('customer_group');
 
     /* handling cases for new locale if not present in current channel */
     if ($channel !== 'all') {
@@ -460,7 +460,7 @@
                     },
 
                     searchCollection: function (searchValue) {
-                        this.formURL("search", 'all', searchValue, '{{ __('ui::app.datagrid.search-title') }}');
+                        this.formURL("search", 'all', searchValue, 'Search');
                     },
 
                     // function triggered to check whether the query exists or not and then call the make filters from the url
@@ -725,36 +725,24 @@
 
                             switch (obj.column) {
                                 case "search":
-                                    obj.label = "{{ __('ui::app.datagrid.search-title') }}";
+                                    obj.label = "Search";
                                     break;
                                 case "channel":
-                                    obj.label = "{{ __('ui::app.datagrid.channel') }}";
+                                    obj.label = "Channel";
                                     if ('channels' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val);
-
-                                        if (obj.prettyValue !== undefined) {
-                                            obj.prettyValue = obj.prettyValue.name;
-                                        }
+                                        obj.prettyValue = this.extraFilters['channels'].find(channel => channel.code == obj.val).name
                                     }
                                     break;
                                 case "locale":
-                                    obj.label = "{{ __('ui::app.datagrid.locale') }}";
+                                    obj.label = "Locale";
                                     if ('locales' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val);
-
-                                        if (obj.prettyValue !== undefined) {
-                                            obj.prettyValue = obj.prettyValue.name;
-                                        }
+                                        obj.prettyValue = this.extraFilters['locales'].find(locale => locale.code === obj.val).name
                                     }
                                     break;
                                 case "customer_group":
-                                    obj.label = "{{ __('ui::app.datagrid.customer-group') }}";
+                                    obj.label = "Customer Group";
                                     if ('customer_groups' in this.extraFilters) {
-                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10));
-
-                                        if (obj.prettyValue !== undefined) {
-                                            obj.prettyValue = obj.prettyValue.name;
-                                        }
+                                        obj.prettyValue = this.extraFilters['customer_groups'].find(customer_group => customer_group.id === parseInt(obj.val, 10)).name
                                     }
                                     break;
                                 case "sort":
@@ -782,7 +770,7 @@
                                     break;
                             }
 
-                            if (obj.column !== undefined && obj.column !== 'admin_locale' && obj.val !== undefined) {
+                            if (obj.column !== undefined && obj.val !== undefined) {
                                 this.filters.push(obj);
                             }
 

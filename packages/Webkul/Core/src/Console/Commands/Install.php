@@ -55,7 +55,7 @@ class Install extends Command
 
         // running `php artisan vendor:publish --all`
         $this->warn('Step: Publishing assets and configurations...');
-        $result = $this->call('vendor:publish', ['--all' => true, '--force' => true]);
+        $result = $this->call('vendor:publish', ['--all']);
         $this->info($result);
 
         // running `php artisan storage:link`
@@ -72,11 +72,6 @@ class Install extends Command
         $this->warn('Step: Composer autoload...');
         $result = shell_exec('composer dump-autoload');
         $this->info($result);
-
-        // removing the installer directory
-        if (is_dir('public/installer')) {
-            shell_exec('rm -rf public/installer');
-        }
 
         // final information
         $this->info('-----------------------------');
@@ -123,7 +118,7 @@ class Install extends Command
             $input_admin_url = $this->ask('Please Enter the Admin URL : ');
             $this->envUpdate('APP_ADMIN_URL=', $input_admin_url ?: $default_admin_url);
 
-            $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'es', 'fa', 'nl', 'pt_BR'], 1);
+            $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'fa', 'nl', 'pt_BR'], 1);
             $this->envUpdate('APP_LOCALE=', $locale);
 
             $TimeZones = timezone_identifiers_list();

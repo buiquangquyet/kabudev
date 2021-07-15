@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Webkul\Customer\Rules\VatIdRule;
-use Webkul\Admin\DataGrids\AddressDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
@@ -11,21 +10,21 @@ use Webkul\Customer\Repositories\CustomerAddressRepository;
 class AddressController extends Controller
 {
     /**
-     * Contains route related configuration.
+     * Contains route related configuration
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * CustomerRepository object
+     * Customer Repository object
      *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
-     * CustomerAddressRepository object
+     * CustomerAddress Repository object
      *
      * @var \Webkul\Customer\Repositories\CustomerAddressRepository
      */
@@ -41,7 +40,8 @@ class AddressController extends Controller
     public function __construct(
         CustomerRepository $customerRepository,
         CustomerAddressRepository $customerAddressRepository
-    ) {
+    )
+    {
         $this->customerRepository = $customerRepository;
 
         $this->customerAddressRepository = $customerAddressRepository;
@@ -50,7 +50,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Fetch address by customer id.
+     * Method to populate the seller order page which will be populated.
      *
      * @param  int  $id
      * @return \Illuminate\View\View
@@ -58,10 +58,6 @@ class AddressController extends Controller
     public function index($id)
     {
         $customer = $this->customerRepository->find($id);
-
-        if (request()->ajax()) {
-            return app(AddressDataGrid::class)->toJson();
-        }
 
         return view($this->_config['view'], compact('customer'));
     }
@@ -106,7 +102,7 @@ class AddressController extends Controller
         if ($this->customerAddressRepository->create($data)) {
             session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
-            return redirect()->route('admin.customer.edit', ['id' => $data['customer_id']]);
+            return redirect()->route('admin.customer.addresses.index', ['id' => $data['customer_id']]);
         } else {
             session()->flash('success', trans('admin::app.customers.addresses.error-create'));
 
@@ -128,7 +124,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Edit's the pre made resource of customer called address.
+     * Edit's the premade resource of customer called Address.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -178,7 +174,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Mass delete the customer's addresses.
+     * Mass Delete the customer's addresses
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

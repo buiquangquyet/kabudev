@@ -7,18 +7,17 @@ use Webkul\Core\Eloquent\Repository;
 class WishlistRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify Model class name
      *
      * @return mixed
      */
+
     function model()
     {
         return 'Webkul\Customer\Contracts\Wishlist';
     }
 
     /**
-     * Create wishlist.
-     *
      * @param  array  $data
      * @return \Webkul\Customer\Contracts\Wishlist
      */
@@ -30,8 +29,6 @@ class WishlistRepository extends Repository
     }
 
     /**
-     * Update wishlist.
-     *
      * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
@@ -58,28 +55,25 @@ class WishlistRepository extends Repository
     }
 
     /**
-     * Get customer wishlist items.
+     * get customer wishlist Items.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getCustomerWishlist()
+    public function getCustomerWhishlist()
     {
-        /* due to ambigious ids only selecting from wishlist table */
-        $query = $this->model->select('wishlist.*');
+        $query = $this->model;
 
-        /* don't add product repository method as that one will need a product flat table */
         if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-            $query = $query
-                ->leftJoin('products as ps', 'wishlist.product_id', '=', 'ps.id')
-                ->leftJoin('product_inventories as pv', 'ps.id', '=', 'pv.product_id')
-                ->where(function ($qb) {
-                    $qb
-                        ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                        ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty' , '>' , 0);
-                });
+            $query = $this->model
+            ->leftJoin('products as ps', 'wishlist.product_id', '=', 'ps.id')
+            ->leftJoin('product_inventories as pv', 'ps.id', '=', 'pv.product_id')
+            ->where(function ($qb) {
+                $qb
+                    ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
+                    ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty' , '>' , 0);
+            });
         }
 
-        /* main check to determine the wishlist */
         return $query->where([
             'channel_id'  => core()->getCurrentChannel()->id,
             'customer_id' => auth()->guard('customer')->user()->id,

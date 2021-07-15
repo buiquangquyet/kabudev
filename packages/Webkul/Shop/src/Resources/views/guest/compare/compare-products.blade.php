@@ -2,7 +2,7 @@
     $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
     $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily();
 
-    $locale = core()->getRequestedLocaleCode();
+    $locale = request()->get('locale') ?: app()->getLocale();
 
     $attributeOptionTranslations = DB::table('attribute_option_translations')->where('locale', $locale)->get()->toJson();
 @endphp
@@ -68,7 +68,7 @@
 
                                     @case('addToCartHtml')
                                         <div class="action">
-                                            <div v-html="product.addToCartHtml"></div>
+                                            <div v-html="addToCartHtml"></div>
 
                                             <span class="icon white-cross-sm-icon remove-product" @click="removeProductCompare(product.id)"></span>
                                         </div>
@@ -105,11 +105,6 @@
                                                 <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'single')" class="fs16"></span>
                                                 <span v-else class="fs16">__</span>
                                                 @break;
-
-                                            @case('multiselect')
-                                                <span v-if="product.product['{{ $attribute['code'] }}']" v-html="getAttributeOptions(product['{{ $attribute['code'] }}'] ? product : product.product['{{ $attribute['code'] }}'] ? product.product : null, '{{ $attribute['code'] }}', 'multiple')" class="fs16"></span>
-                                                <span v-else class="fs16">__</span>
-                                                @break
 
                                             @case ('file')
                                             @case ('image')

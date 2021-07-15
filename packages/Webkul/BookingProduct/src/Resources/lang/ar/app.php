@@ -63,8 +63,7 @@ return [
                 'day' => 'يوم',
                 'status' => 'الحالة',
                 'open' => 'افتح',
-                'close' => 'غلق',
-                'time-error' => 'The to time must be greater than the from time.'
+                'close' => 'غلق'
             ]
         ]
     ],

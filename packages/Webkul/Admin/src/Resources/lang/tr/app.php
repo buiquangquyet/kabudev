@@ -78,8 +78,7 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'İndirim',
-        'cms' => 'CMS',
-        'transactions' => 'Transactions'
+        'cms' => 'CMS'
     ],
 
     'acl' => [
@@ -193,7 +192,6 @@ return [
         'billed-to' => 'Fatura Bilgileri',
         'shipped-to' => 'Kargo Bilgileri',
         'order-id' => 'Sipariş ID',
-        'invoice-id' => 'Fatura numarası',
         'invoice-date' => 'Fatura Tarihi',
         'total-qty' => 'Toplam Miktar',
         'inventory-source' => 'Envanter Kaynağı',
@@ -238,9 +236,7 @@ return [
         'view' => 'Görüntüle',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Durum Güncelle',
-        'transaction-id' => 'Transaction Id',
-        'transaction-date' => 'Transaction Date',
+        'update-status' => 'Durum Güncelle'
     ],
 
     'account' => [
@@ -392,8 +388,7 @@ return [
             'submit-comment' => 'Yorum Gönder',
             'notify-customer' => 'Müşteriyi Bilgilendir',
             'customer-notified' => ':date | Müşteri <b>Bilgilendirildi</b>',
-            'customer-not-notified' => ':date | Müşteri <b>Bilgilendirilmedi</b>',
-            'transactions' => 'Transactions'
+            'customer-not-notified' => ':date | Müşteri <b>Bilgilendirilmedi</b>'
         ],
 
         'invoices' => [
@@ -418,10 +413,7 @@ return [
             'print' => 'Yazdır',
             'order-date' => 'Sipariş Tarihi',
             'creation-error' => 'Fatura oluşturulmasına izin verilmedi.',
-            'product-error' => 'Fatura oluşturulması için ürün ekleyiniz.',
-            'status-overdue' => 'Overdue',
-            'status-pending' => 'Pending Payment',
-            'status-paid'    => 'Paid',
+            'product-error' => 'Fatura oluşturulması için ürün ekleyiniz.'
         ],
 
         'shipments' => [
@@ -473,28 +465,6 @@ return [
             'view-title' => 'İade #:refund_id',
             'invalid-refund-amount-error' => 'Lütfen iade miktarını giriniz.'
 
-        ],
-
-        'transactions' => [
-            'title'               => 'Transactions',
-            'create-title'        => 'Add transaction',
-            'id'                  => 'Id',
-            'transaction-id'      => 'Transaction Id',
-            'payment-method'      => 'Payment method',
-            'transaction-amount' => 'Transaction amount',
-            'action'              => 'Action',
-            'view-title'          => 'Transaction #:transaction_id',
-            'transaction-data'    => 'Transaction Data',
-            'order-id'            => 'Order Id',
-            'invoice-id' => 'Invoice Id',
-            'status'              => 'Status',
-            'created-at'          => 'Created At',
-            'transaction-details' => 'Transaction Details',
-            'response' => [
-                'invoice-missing'    => 'This invoice id does not exist',
-                'transaction-saved'  => 'The transaction has been saved',
-                'already-paid'       => 'This invoice has already been paid'
-            ]
         ]
     ],
 
@@ -865,9 +835,7 @@ return [
             'update-success' => 'Slider başarıyla güncellendi.',
             'update-fail' => 'Slider güncellenemez.',
             'delete-success' => 'Slider başarıyla silindi.',
-            'delete-fail' => 'Slider silinirken hata oluştu.',
-            'expired-at'  => 'Expire Date',
-            'sort-order'  => 'Sort Order'
+            'delete-fail' => 'Slider silinirken hata oluştu.'
         ],
 
         'tax-categories' => [
@@ -1406,13 +1374,9 @@ return [
             'weight-unit' => 'Ağırlık Birimi',
             'email-settings'    => 'Mail Ayarları',
             'email-sender-name' => 'Mail Gönderici Adı',
-            'email-sender-name-tip' => 'This name will be displayed in the customers inbox',
             'shop-email-from'   => 'Mağaza Mail Adresi [Mail gönderimleri için]',
-            'shop-email-from-tip' => 'The email address of this channel to send emails to your customers',
             'admin-name'    => 'Yönetici Adı',
-            'admin-name-tip' => 'This name will be displayed in all admin emails',
             'admin-email' => 'Yönetici Mail Adresi',
-            'admin-email-tip' => 'The email address of the admin for this channel to receive emails',
             'admin-page-limit' => 'Sayfa Başına Varsayılan İçerik (Yönetici)',
             'design' => 'Tasarım',
             'admin-logo' => 'Panel Logo',
@@ -1426,24 +1390,14 @@ return [
             'order-number-length' => 'Numara Uzunluğu',
             'order-number-suffix' => 'Numara Son Eki',
             'order-number-generator-class' => 'Sipariş Numarası Üreticisi',
-            'minimum-order' => 'Minimum Sipariş Ayarları',
-            'minimum-order-amount' => 'Minimum Sipariş Tutarı',
-            'invoice-settings' => 'Fatura Ayarları',
-            'invoice-number' => 'Fatura Numarası Ayarları',
-            'invoice-number-prefix' => 'Fatura Numarası Ön Eki',
-            'invoice-number-length' => 'Fatura Numarası Uzunluğu',
-            'invoice-number-suffix' => 'Fatura Numarası Eki',
-            'invoice-number-generator-class' => 'Fatura Numarası Oluşturucu',
-            'payment-terms' => 'Ödeme şartları',
-            'due-duration' => 'Vade Süresi',
-            'due-duration-day' => ':due-duration Gün',
-            'due-duration-days' => ':due-duration Günler',
-            'invoice-slip-design' => 'Fatura Tasarımı',
-            'logo' => 'logo',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Varsayılan',
             'sandbox' => 'Havuz',
             'all-channels' => 'Tümü',
             'all-locales' => 'Tümü',
+            'invoice-slip-design' => 'Fatura Tasarımı',
+            'logo' => 'logo',
             'storefront' => 'Mağaza Arayüzü',
             'default-list-mode' => 'Varsayılan Listeleme Modu',
             'grid' => 'Tablo',
@@ -1486,16 +1440,7 @@ return [
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
             'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display' => 'Allow customers to directly buy products',
-            'width' => 'Width',
-            'height' => 'Height',
-            'cache-small-image' => 'Small Image',
-            'cache-medium-image' => 'Medium Image',
-            'cache-large-image' => 'Large Image',
-            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
-            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
-            'set-order-status'   => 'Set the order status after creating the invoice to',
-            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

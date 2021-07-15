@@ -11,7 +11,7 @@
             <div class="row" :class="localeDirection">
                 <div
                     class="col-md-12 no-padding carousel-products"
-                    :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
+                    :class="showRecentlyViewed ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
                     <carousel-component
                         :slides-per-page="slidesPerPage"
                         navigation-enabled="hide"
@@ -39,7 +39,7 @@
                     :add-class="`col-lg-3 col-md-12 ${localeDirection}`"
                     quantity="3"
                     add-class-wrapper=""
-                    v-if="showRecentlyViewed === 'true'">
+                    v-if="showRecentlyViewed">
                 </recently-viewed>
             </div>
         </template>
@@ -50,7 +50,7 @@
     export default {
         props: {
             count: {
-                type: String,
+                type: Number,
                 default: 10
             },
             productId: {
@@ -61,8 +61,8 @@
             productRoute: String,
             localeDirection: String,
             showRecentlyViewed: {
-                type: String,
-                default: 'false'
+                type: Boolean,
+                default: false
             },
             recentlyViewedTitle: String,
             noDataText: String,
@@ -145,9 +145,7 @@
 
             /* get window class */
             getWindowClass: function () {
-                return this.showRecentlyViewed === 'true'
-                    ? '.with-recent-viewed'
-                    : '.without-recent-viewed';
+                return this.showRecentlyViewed ? '.with-recent-viewed' : '.without-recent-viewed';
             },
 
             /* on resize set window width */

@@ -1,32 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
-        {{-- meta tags --}}
         <meta http-equiv="Cache-control" content="no-cache">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        {{-- lang supports inclusion --}}
-        <style type="text/css">
-            @font-face {
-                font-family: 'Hind';
-                src: url({{ asset('vendor/webkul/ui/assets/fonts/Hind/Hind-Regular.ttf') }}) format('truetype');
-            }
-
-            @font-face {
-                font-family: 'Noto Sans';
-                src: url({{ asset('vendor/webkul/ui/assets/fonts/Noto/NotoSans-Regular.ttf') }}) format('truetype');
-            }
-        </style>
-
-        @php
-            /* main font will be set on locale based */
-            $mainFontFamily = app()->getLocale() === 'ar' ? 'DejaVu Sans' : 'Noto Sans';
-        @endphp
-
-        {{-- main css --}}
         <style type="text/css">
             * {
-                font-family: '{{ $mainFontFamily }}';
+                font-family: DejaVu Sans;
             }
 
             body, th, td, h5 {
@@ -127,9 +107,9 @@
                         <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
                     </div>
                 </div>
-                @if (core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo'))
+                @if (core()->getConfigData('sales.orderSettings.invoice_slip_design.logo'))
                     <div class="image">
-                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_setttings.invoice_slip_design.logo')) }}"/>
+                        <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.orderSettings.invoice_slip_design.logo')) }}"/>
                     </div>
                 @endif
                 <div class="merchant-details">
@@ -157,12 +137,7 @@
             <div class="invoice-summary">
                 <div class="row">
                     <span class="label">{{ __('admin::app.sales.invoices.invoice-id') }} -</span>
-                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
-                </div>
-
-                <div class="row">
-                    <span class="label">{{ __('admin::app.sales.invoices.date') }} -</span>
-                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
+                    <span class="value">#{{ $invoice->id }}</span>
                 </div>
 
                 <div class="row">
@@ -171,16 +146,9 @@
                 </div>
 
                 <div class="row">
-                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} -</span>
+                    <span class="label">{{ __('admin::app.sales.invoices.order-date') }} </span>
                     <span class="value">{{ $invoice->created_at->format('d-m-Y') }}</span>
                 </div>
-
-                @if ($invoice->hasPaymentTerm())
-                    <div class="row">
-                        <span class="label">{{ __('admin::app.admin.system.payment-terms') }} -</span>
-                        <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
-                    </div>
-                @endif
 
                 <div class="table address">
                     <table>
@@ -338,6 +306,7 @@
                 </table>
 
             </div>
+
         </div>
     </body>
 </html>

@@ -360,10 +360,10 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
                 'is_comparable'       => '0',
-            ],[
+            ], [
                 'id'                  => '19',
-                'code'                => 'length',
-                'admin_name'          => 'Length',
+                'code'                => 'width',
+                'admin_name'          => 'Width',
                 'type'                => 'text',
                 'validation'          => 'decimal',
                 'position'            => '22',
@@ -381,8 +381,8 @@ class AttributeTableSeeder extends Seeder
                 'is_comparable'       => '0',
             ], [
                 'id'                  => '20',
-                'code'                => 'width',
-                'admin_name'          => 'Width',
+                'code'                => 'height',
+                'admin_name'          => 'Height',
                 'type'                => 'text',
                 'validation'          => 'decimal',
                 'position'            => '23',
@@ -400,8 +400,8 @@ class AttributeTableSeeder extends Seeder
                 'is_comparable'       => '0',
             ], [
                 'id'                  => '21',
-                'code'                => 'height',
-                'admin_name'          => 'Height',
+                'code'                => 'depth',
+                'admin_name'          => 'Depth',
                 'type'                => 'text',
                 'validation'          => 'decimal',
                 'position'            => '24',

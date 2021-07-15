@@ -264,14 +264,11 @@ return [
                     'submit' => 'Save Address',
                     'success' => 'Address updated successfully.',
                 ],
-
                 'delete' => [
                     'success' => 'Address successfully deleted',
                     'failure' => 'Address cannot be deleted',
                     'wrong-password' => 'Wrong Password !'
-                ],
-
-                'default-address' => 'Default Address',
+                ]
             ],
 
             'order' => [
@@ -331,8 +328,6 @@ return [
                     'invoice-id' => 'Invoice Id',
                     'order-id' => 'Order Id',
                     'order-date' => 'Order Date',
-                    'invoice-date' => 'Invoice Date',
-                    'payment-terms' => 'Payment Terms',
                     'bill-to' => 'Bill to',
                     'ship-to' => 'Ship to',
                     'contact' => 'Contact',
@@ -387,22 +382,12 @@ return [
             'review' => [
                 'index' => [
                     'title' => 'Reviews',
-                    'page-title' => 'Reviews',
-
+                    'page-title' => 'Reviews'
                 ],
 
                 'view' => [
                     'page-tile' => 'Review #:id',
-                ],
-
-                'delete' => [
-                    'confirmation-message' => 'Are you sure you want to delete this review?',
-                ],
-
-                'delete-all' => [
-                    'title' => 'Delete All',
-                    'confirmation-message' => 'Are you sure you want to delete all the reviews?',
-                ],
+                ]
             ]
         ]
     ],
@@ -461,7 +446,6 @@ return [
         'compare_options' => 'Compare Options',
         'wishlist-options' => 'Wishlist Options',
         'offers' => 'Buy :qty for :price each and save :discount%',
-        'tax-inclusive' => 'Inclusive of all taxes'
     ],
 
     // 'reviews' => [

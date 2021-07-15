@@ -262,7 +262,6 @@ return [
         'short-description' => 'Kısa Açıklamalar',
         'recently-viewed'   => 'En Son Gezdiğiniz Ürünler',
         'be-first-review'   => 'Bu ürüne ilk siz inceleme girin!',
-        'tax-inclusive'     => 'Inclusive of all taxes',
     ],
 
     'shop'          => [

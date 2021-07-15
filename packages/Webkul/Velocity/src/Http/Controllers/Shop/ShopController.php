@@ -62,7 +62,7 @@ class ShopController extends Controller
         if (! $slug) {
             abort(404);
         }
-        
+
         switch ($slug) {
             case 'new-products':
             case 'featured-products':
@@ -84,9 +84,7 @@ class ShopController extends Controller
                                 return $this->velocityHelper->formatProduct($product);
                             }
                         }
-                    })->reject(function ($product) {
-                        return is_null($product);
-                    })->values(),
+                    }),
                 ];
 
                 break;

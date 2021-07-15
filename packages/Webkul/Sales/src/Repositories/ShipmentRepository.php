@@ -70,10 +70,9 @@ class ShipmentRepository extends Repository
 
     /**
      * @param  array  $data
-     * @param  string $orderState
      * @return \Webkul\Sales\Contracts\Shipment
      */
-    public function create(array $data, $orderState = null)
+    public function create(array $data)
     {
         DB::beginTransaction();
 
@@ -156,11 +155,7 @@ class ShipmentRepository extends Repository
                 'inventory_source_name' => $shipment->inventory_source->name,
             ]);
 
-            if (isset($orderState)) {
-                $this->orderRepository->updateOrderStatus($order, $orderState);
-            } else {
-                $this->orderRepository->updateOrderStatus($order);
-            }
+            $this->orderRepository->updateOrderStatus($order);
 
             Event::dispatch('sales.shipment.save.after', $shipment);
         } catch (\Exception $e) {

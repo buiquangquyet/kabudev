@@ -12,14 +12,10 @@ use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Contracts\Product as ProductContract;
+use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
 
 class Product extends Model implements ProductContract
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var $fillable
-     */
     protected $fillable = [
         'type',
         'attribute_family_id',
@@ -27,20 +23,6 @@ class Product extends Model implements ProductContract
         'parent_id',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var $casts
-     */
-    protected $casts = [
-        'additional' => 'array'
-    ];
-
-    /**
-     * The type of product.
-     *
-     * @var $typeInstance
-     */
     protected $typeInstance;
 
     /**
@@ -339,7 +321,7 @@ class Product extends Model implements ProductContract
     public function getAttribute($key)
     {
         if (! method_exists(static::class, $key)
-            && ! in_array($key, ['pivot', 'parent_id', 'attribute_family_id'])
+            && ! in_array($key, ['parent_id', 'attribute_family_id'])
             && ! isset($this->attributes[$key])
         ) {
             if (isset($this->id)) {
@@ -409,8 +391,9 @@ class Product extends Model implements ProductContract
             return;
         }
 
-        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-        $channel = core()->getRequestedChannelCode();
+        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+
+        $locale = request()->get('locale') ?: app()->getLocale();
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
@@ -430,10 +413,11 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Overrides the default Eloquent query builder.
+     * Overrides the default Eloquent query builder
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @return \Webkul\Product\Database\Eloquent\Builder
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function newEloquentBuilder($query)
     {

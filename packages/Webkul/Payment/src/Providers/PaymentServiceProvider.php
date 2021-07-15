@@ -17,7 +17,6 @@ class PaymentServiceProvider extends ServiceProvider
     public function boot()
     {
         include __DIR__ . '/../Http/helpers.php';
-        $this->app->register(EventServiceProvider::class);
     }
 
     /**
@@ -45,7 +44,7 @@ class PaymentServiceProvider extends ServiceProvider
             return new Payment();
         });
     }
-
+    
     /**
      * Register package config.
      *

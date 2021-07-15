@@ -127,14 +127,6 @@ class Order extends Model implements OrderContract
     }
 
     /**
-     * Get the order transactions record associated with the order.
-     */
-    public function transactions()
-    {
-        return $this->hasMany(OrderTransactionProxy::modelClass());
-    }
-
-    /**
      * Get the customer record associated with the order.
      */
     public function customer()
@@ -287,11 +279,6 @@ class Order extends Model implements OrderContract
     public function canRefund(): bool
     {
         if ($this->status === self::STATUS_FRAUD) {
-            return false;
-        }
-        
-        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
-        if ($pendingInvoice) {
             return false;
         }
 

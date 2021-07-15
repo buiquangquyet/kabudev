@@ -2,30 +2,26 @@
 
 namespace Webkul\Product\Providers;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event handler mappings for the application.
+     * Bootstrap services.
      *
-     * @var array
+     * @return void
      */
-    protected $listen = [
-        'catalog.attribute.create.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated'
-        ],
-        'catalog.attribute.update.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated'
-        ],
-        'catalog.attribute.delete.before' => [
-            'Webkul\Product\Listeners\ProductFlat@afterAttributeDeleted'
-        ],
-        'catalog.product.create.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated'
-        ],
-        'catalog.product.update.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated'
-        ],
-    ];
+    public function boot()
+    {
+        Event::listen('catalog.attribute.create.after', 'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated');
+
+        Event::listen('catalog.attribute.update.after', 'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated');
+
+        Event::listen('catalog.attribute.delete.before', 'Webkul\Product\Listeners\ProductFlat@afterAttributeDeleted');
+
+        Event::listen('catalog.product.create.after', 'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated');
+
+        Event::listen('catalog.product.update.after', 'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated');
+    }
 }

@@ -31,10 +31,10 @@ class SliderDataGrid extends DataGrid
         parent::__construct();
 
         /* locale */
-        $this->locale = core()->getRequestedLocaleCode();
+        $this->locale = request()->get('locale') ?? app()->getLocale();
 
         /* channel */
-        $this->channel = core()->getRequestedChannelCode();
+        $this->channel = request()->get('channel') ?? (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
         /* finding channel code */
         if ($this->channel !== 'all') {
@@ -52,7 +52,7 @@ class SliderDataGrid extends DataGrid
           ->where('ct.locale', app()->getLocale());
 
         if ($this->locale !== 'all') {
-            $queryBuilder->whereRaw("find_in_set(?, sl.locale)", [$this->locale]);
+            $queryBuilder->where('sl.locale', $this->locale);
         }
 
         if ($this->channel !== 'all') {

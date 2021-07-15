@@ -262,7 +262,6 @@ return [
         'short-description' => 'Krótkie opisy',
         'recently-viewed'   => 'Ostatnio oglądane produkty',
         'be-first-review'   => 'Bądź pierwszym, który napisze recenzję',
-        'tax-inclusive'     => 'Inclusive of all taxes',
     ],
 
     'shop'          => [

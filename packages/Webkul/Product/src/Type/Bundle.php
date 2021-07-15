@@ -2,17 +2,17 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Helpers\BundleOption;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Datatypes\CartItemValidationResult;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
+use Webkul\Product\Helpers\BundleOption;
+use Webkul\Checkout\Models\CartItem;
 
 class Bundle extends AbstractType
 {
@@ -42,7 +42,7 @@ class Bundle extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'length', 'width', 'height', 'weight'];
+    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'];
 
     /**
      * These blade files will be included in product edit page
@@ -363,23 +363,23 @@ class Bundle extends AbstractType
         return [
             'from' => [
                 'regular_price' => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($this->getRegularMinimalPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($this->getRegularMinimalPrice())),
+                    'price'          => core()->convertPrice($this->getRegularMinimalPrice()),
+                    'formated_price' => core()->currency($this->getRegularMinimalPrice()),
                 ],
                 'final_price'   => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($this->getMinimalPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($this->getMinimalPrice())),
+                    'price'          => core()->convertPrice($this->getMinimalPrice()),
+                    'formated_price' => core()->currency($this->getMinimalPrice()),
                 ]
             ],
 
             'to'   => [
                 'regular_price' => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($this->getRegularMaximamPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($this->getRegularMaximamPrice())),
+                    'price'          => core()->convertPrice($this->getRegularMaximamPrice()),
+                    'formated_price' => core()->currency($this->getRegularMaximamPrice()),
                 ],
                 'final_price'   => [
-                    'price'          => core()->convertPrice($this->evaluatePrice($this->getMaximamPrice())),
-                    'formated_price' => core()->currency($this->evaluatePrice($this->getMaximamPrice())),
+                    'price'          => core()->convertPrice($this->getMaximamPrice()),
+                    'formated_price' => core()->currency($this->getMaximamPrice()),
                 ]
             ]
         ];

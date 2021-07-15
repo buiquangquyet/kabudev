@@ -63,8 +63,7 @@ return [
                 'day' => 'روز',
                 'status' => 'وضعیت',
                 'open' => 'باز کن',
-                'close' => 'بستن',
-                'time-error' => 'The to time must be greater than the from time.'
+                'close' => 'بستن'
             ]
         ]
     ],

@@ -9,17 +9,17 @@ use Webkul\Product\Repositories\SearchRepository;
 class HomeController extends Controller
 {
     /**
-     * Slider repository instance.
+     * SliderRepository object
      *
      * @var \Webkul\Core\Repositories\SliderRepository
-     */
+    */
     protected $sliderRepository;
 
     /**
-     * Search repository instance.
+     * SearchRepository object
      *
      * @var \Webkul\Core\Repositories\SearchRepository
-     */
+    */
     protected $searchRepository;
 
     /**
@@ -28,11 +28,12 @@ class HomeController extends Controller
      * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
      * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
      * @return void
-     */
+    */
     public function __construct(
         SliderRepository $sliderRepository,
         SearchRepository $searchRepository
-    ) {
+    )
+    {
         $this->sliderRepository = $sliderRepository;
 
         $this->searchRepository = $searchRepository;
@@ -41,20 +42,28 @@ class HomeController extends Controller
     }
 
     /**
-     * Loads the home page for the storefront.
-     *
-     * @return \Illuminate\View\View
+     * loads the home page for the storefront
+     * 
+     * @return \Illuminate\View\View 
      */
     public function index()
     {
-        $sliderData = $this->sliderRepository->getActiveSliders();
+        $currentChannel = core()->getCurrentChannel();
+
+        $currentLocale = core()->getCurrentLocale();
+
+        $sliderData = $this->sliderRepository
+            ->where('channel_id', $currentChannel->id)
+            ->where('locale', $currentLocale->code)
+            ->get()
+            ->toArray();
 
         return view($this->_config['view'], compact('sliderData'));
     }
 
     /**
-     * Loads the home page for the storefront if something wrong.
-     *
+     * loads the home page for the storefront
+     * 
      * @return \Exception
      */
     public function notFound()
@@ -63,12 +72,14 @@ class HomeController extends Controller
     }
 
     /**
-     * Upload image for product search with machine learning.
+     * Upload image for product search with machine learning
      *
      * @return \Illuminate\Http\Response
      */
     public function upload()
     {
-        return $this->searchRepository->uploadSearchImage(request()->all());
+        $url = $this->searchRepository->uploadSearchImage(request()->all());
+
+        return $url; 
     }
 }

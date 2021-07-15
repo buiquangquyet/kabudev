@@ -41,7 +41,7 @@ class ChannelDataGrid extends DataGrid
     {
         parent::__construct();
 
-        $this->locale = core()->getRequestedLocaleCode();
+        $this->locale = request()->get('locale') ?? app()->getLocale();
 
         $this->channelRepository = $channelRepository;
     }

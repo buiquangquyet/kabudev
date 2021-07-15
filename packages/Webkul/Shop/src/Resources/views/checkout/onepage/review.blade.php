@@ -19,17 +19,8 @@
                             <b>{{ $billingAddress->first_name }} {{ $billingAddress->last_name }}</b>
                         </li>
                         <li class="mb-10">
-                            {{ $billingAddress->address1 }},<br/>
+                            {{ $billingAddress->address1 }},<br/> {{ $billingAddress->state }}
                         </li>
-
-                        <li class="mb-10">
-                            {{ $billingAddress->postcode . " " . $billingAddress->city }}
-                        </li>
-
-                        <li class="mb-10">
-                            {{ $billingAddress->state }}
-                        </li>
-
                         <li class="mb-10">
                             {{ core()->country_name($billingAddress->country) }} {{ $billingAddress->postcode }}
                         </li>
@@ -59,19 +50,10 @@
                             <b>{{ $shippingAddress->first_name }} {{ $shippingAddress->last_name }}</b>
                         </li>
                         <li class="mb-10">
-                            {{ $shippingAddress->address1 }},<br/>
+                            {{ $shippingAddress->address1 }},<br/> {{ $shippingAddress->state }}
                         </li>
-
                         <li class="mb-10">
-                            {{ $shippingAddress->postcode . " " . $shippingAddress->city }}
-                        </li>
-
-                        <li class="mb-10">
-                            {{ $shippingAddress->state }}
-                        </li>
-
-                        <li class="mb-10">
-                            {{ core()->country_name($shippingAddress->country) }}
+                            {{ core()->country_name($shippingAddress->country) }} {{ $shippingAddress->postcode }}
                         </li>
 
                         <span class="horizontal-rule mb-15 mt-15"></span>

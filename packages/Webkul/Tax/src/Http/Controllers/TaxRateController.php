@@ -3,15 +3,16 @@
 namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Tax\Repositories\TaxRateRepository;
 use Webkul\Admin\Imports\DataGridImport;
 use Illuminate\Support\Facades\Validator;
+use Excel;
 use Maatwebsite\Excel\Validators\Failure;
-use Webkul\Tax\Repositories\TaxRateRepository;
 
 class TaxRateController extends Controller
 {
     /**
-     * Contains route related configuration.
+     * Contains route related configuration
      *
      * @var array
      */
@@ -48,7 +49,7 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Display a create form for tax rate.
+     * Display a create form for tax rate
      *
      * @return \Illuminate\View\View
      */
@@ -58,7 +59,7 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Create the tax rate.
+     * Create the tax rate
      *
      * @return \Illuminate\Http\Response
      */
@@ -67,7 +68,7 @@ class TaxRateController extends Controller
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
             'is_zip'     => 'sometimes',
-            'zip_code'   => 'nullable',
+            'zip_code'   => 'sometimes|required_without:is_zip',
             'zip_from'   => 'nullable|required_with:is_zip',
             'zip_to'     => 'nullable|required_with:is_zip,zip_from',
             'country'    => 'required|string',
@@ -107,7 +108,7 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Edit the previous tax rate.
+     * Edit the previous tax rate
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -162,7 +163,7 @@ class TaxRateController extends Controller
     }
 
     /**
-     * import function for the upload.
+     * import function for the upload
      *
      * @return \Illuminate\Http\Response
      */
@@ -189,7 +190,7 @@ class TaxRateController extends Controller
                             'country'    => 'required|string',
                             'tax_rate'   => 'required|numeric|min:0.0001',
                             'is_zip'     => 'sometimes',
-                            'zip_code'   => 'nullable',
+                            'zip_code'   => 'sometimes|required_without:is_zip',
                             'zip_from'   => 'nullable|required_with:is_zip',
                             'zip_to'     => 'nullable|required_with:is_zip,zip_from',
                         ]);
@@ -262,7 +263,7 @@ class TaxRateController extends Controller
 
                                 if (isset($rateIdentifier)) {
                                     $id = array_search($uploadData['identifier'], $rateIdentifier);
-
+                                    
                                     if ($id) {
                                         $this->taxRateRepository->update($uploadData, $id);
                                     } else {

@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Tax\Helpers;
 
-use Cart;
+use Illuminate\Support\Facades\Config;
 use UnitTester;
+use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
-use Webkul\Tax\Models\TaxCategory;
-use Illuminate\Support\Facades\Config;
+use Cart;
 
 class TaxCest
 {
@@ -106,13 +106,7 @@ class TaxCest
 
         foreach ($this->scenario['expectedTaxRates'] as $taxRate => $taxAmount) {
             $I->assertTrue(array_key_exists($taxRate, $result));
-
-            $difference = abs($taxAmount - round($result[$taxRate], 2));
-
-            /* just checking the small difference */
-            if ($difference !== 0.01) {
-                $I->assertEquals($taxAmount, round($result[$taxRate], 2));
-            }
+            $I->assertEquals($taxAmount, $result[$taxRate]);
         }
     }
 

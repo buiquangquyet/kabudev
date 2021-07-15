@@ -5,19 +5,18 @@ namespace Webkul\Product\Repositories;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Product\Models\Product;
 use Illuminate\Pagination\Paginator;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Product\Models\ProductFlat;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\Container as App;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends Repository
 {
@@ -130,7 +129,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param string $categoryId
+     * @param int $categoryId
      *
      * @return \Illuminate\Support\Collection
      */
@@ -149,9 +148,9 @@ class ProductRepository extends Repository
         $page = Paginator::resolveCurrentPage('page');
 
         $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categoryId) {
-            $channel = core()->getRequestedChannelCode();
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = core()->getRequestedLocaleCode();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
             $qb = $query->distinct()
                 ->select('product_flat.*')
@@ -163,7 +162,7 @@ class ProductRepository extends Repository
                 ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {
-                $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
+                $qb->where('product_categories.category_id', $categoryId);
             }
 
             if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
@@ -213,40 +212,8 @@ class ProductRepository extends Repository
             if ($priceFilter = request('price')) {
                 $priceRange = explode(',', $priceFilter);
                 if (count($priceRange) > 0) {
-
-                    $customerGroupId = null;
-
-                    if (Cart::getCurrentCustomer()->check()) {
-                        $customerGroupId = Cart::getCurrentCustomer()->user()->customer_group_id;
-                    } else {
-                        $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
-
-                        if ($customerGuestGroup) {
-                            $customerGroupId = $customerGuestGroup->id;
-                        }
-                    }
-
-                    $qb
-                        ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
-                        ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
-                        ->where(function ($qb) use ($priceRange, $customerGroupId) {
-                            $qb->where(function ($qb) use ($priceRange){
-                                $qb
-                                    ->where('variants.min_price', '>=',  core()->convertToBasePrice($priceRange[0]))
-                                    ->where('variants.min_price', '<=',  core()->convertToBasePrice(end($priceRange)));
-                            })
-                            ->orWhere(function ($qb) use ($priceRange) {
-                                $qb
-                                    ->where('catalog_rule_product_prices.price', '>=',  core()->convertToBasePrice($priceRange[0]))
-                                    ->where('catalog_rule_product_prices.price', '<=',  core()->convertToBasePrice(end($priceRange)));
-                            })
-                            ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
-                                $qb
-                                    ->where('product_customer_group_prices.value', '>=',  core()->convertToBasePrice($priceRange[0]))
-                                    ->where('product_customer_group_prices.value', '<=',  core()->convertToBasePrice(end($priceRange)))
-                                    ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
-                            });
-                        });
+                    $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
+                    $qb->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
                 }
             }
 
@@ -375,9 +342,9 @@ class ProductRepository extends Repository
         $count = core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage');
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
-            $channel = core()->getRequestedChannelCode();
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = core()->getRequestedLocaleCode();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')
@@ -402,9 +369,9 @@ class ProductRepository extends Repository
         $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
 
         $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) {
-            $channel = core()->getRequestedChannelCode();
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = core()->getRequestedLocaleCode();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')
@@ -428,9 +395,9 @@ class ProductRepository extends Repository
      */
     public function searchProductByAttribute($term)
     {
-        $channel = core()->getRequestedChannelCode();
+        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-        $locale = core()->getRequestedLocaleCode();
+        $locale = request()->get('locale') ?: app()->getLocale();
 
         if (config('scout.driver') == 'algolia') {
             $results = app(ProductFlatRepository::class)->getModel()::search('query', function ($searchDriver, string $query, array $options) use ($term, $channel, $locale) {
@@ -466,19 +433,17 @@ class ProductRepository extends Repository
         } else {
             $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term, $channel, $locale) {
 
-                $query = $query->distinct()
-                    ->addSelect('product_flat.*')
-                    ->join('product_flat as variants', 'product_flat.id', '=', DB::raw('COALESCE(' . DB::getTablePrefix() . 'variants.parent_id, ' . DB::getTablePrefix() . 'variants.id)'))
-                    ->where('product_flat.channel', $channel)
-                    ->where('product_flat.locale', $locale)
-                    ->whereNotNull('product_flat.url_key');
-
                 if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
                     $query = $this->checkOutOfStockItem($query);
                 }
 
-                return $query->where('product_flat.status', 1)
+                return $query->distinct()
+                    ->addSelect('product_flat.*')
+                    ->where('product_flat.status', 1)
                     ->where('product_flat.visible_individually', 1)
+                    ->where('product_flat.channel', $channel)
+                    ->where('product_flat.locale', $locale)
+                    ->whereNotNull('product_flat.url_key')
                     ->where(function ($subQuery) use ($term) {
                         $queries = explode('_', $term);
 
@@ -531,9 +496,9 @@ class ProductRepository extends Repository
     public function searchSimpleProducts($term)
     {
         return app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($term) {
-            $channel = core()->getRequestedChannelCode();
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = core()->getRequestedLocaleCode();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
             return $query->distinct()
                 ->addSelect('product_flat.*')
@@ -842,35 +807,17 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Check out of stock items. This method needed `variants` alias in
-     * the `product_flat` query.
+     * @param Webkul\Product\Models\ProductFlat
      *
-     * @param  Webkul\Product\Models\ProductFlat  $query
-     * @return Illuminate\Database\Eloquent\Builder
-     */
-    public function checkOutOfStockItem($query)
-    {
-        return $query
-            ->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
+     * @return Model
+    */
+    public function checkOutOfStockItem($query) {
+        return $query->leftJoin('products as ps', 'product_flat.product_id', '=', 'ps.id')
             ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
             ->where(function ($qb) {
-                return $qb
-                    /* for grouped, downloadable, bundle and booking product */
-                    ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
-                    /* for simple and virtual product */
-                    ->orWhere(function ($qb) {
-                        return $qb->whereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
-                    })
-                    /* for configurable product */
-                    ->orWhere(function ($qb) {
-                        return $qb->where('ps.type', 'configurable')->where(function ($qb) {
-                            return $qb
-                                ->selectRaw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty)')
-                                ->from('product_flat')
-                                ->leftJoin('product_inventories', 'product_inventories.product_id', '=', 'product_flat.product_id')
-                                ->whereRaw(DB::getTablePrefix() . 'product_flat.parent_id = variants.id');
-                        }, '>', 0);
-                    });
+                $qb
+                    ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
+                    ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty' , '>' , 0);
             });
     }
 }

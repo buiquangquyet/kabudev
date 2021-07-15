@@ -263,14 +263,11 @@ return [
                     'submit' => 'Adresse speichern',
                     'success' => 'Adresse erfolgreich aktualisiert.',
                 ],
-
                 'delete' => [
                     'success' => 'Adresse erfolgreich gelöscht',
                     'failure' => 'Adresse kann nicht gelöscht werden',
                     'wrong-password' => 'Falsches Passwort !'
-                ],
-
-                'default-address' => 'Default Address',
+                ]
             ],
 
             'order' => [
@@ -330,8 +327,6 @@ return [
                     'invoice-id' => 'Rechnungsnummer',
                     'order-id' => 'Auftragsnummer',
                     'order-date' => 'Bestelldatum',
-                    'invoice-date' => 'Rechnungsdatum',
-                    'payment-terms' => 'Zahlungsbedingungen',
                     'bill-to' => 'Rechnung an',
                     'ship-to' => 'Versenden an',
                     'contact' => 'Kontakt',
@@ -388,16 +383,7 @@ return [
 
                 'view' => [
                     'page-tile' => 'Bewertung #:id',
-                ],
-
-                'delete' => [
-                    'confirmation-message' => 'Möchten Sie diese Bewertung wirklich löschen?',
-                ],
-
-                'delete-all' => [
-                    'title' => 'Alles löschen',
-                    'confirmation-message' => 'Möchten Sie wirklich alle Bewertungen löschen?',
-                ],
+                ]
             ]
         ]
     ],
@@ -508,7 +494,7 @@ return [
             'cart-remove-action' => 'Wollen Sie dies wirklich tun?',
             'partial-cart-update' => 'Nur einige der Produkte wurden aktualisiert',
             'link-missing' => '',
-            'minimum-order-message' => 'Mindestbestellmenge ist :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [

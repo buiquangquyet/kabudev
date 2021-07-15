@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web', 'admin_locale']], function () {
+Route::group(['middleware' => ['web']], function () {
     Route::prefix(config('app.admin_url'))->group(function () {
 
         Route::get('/', 'Webkul\Admin\Http\Controllers\Controller@redirectToLogin');
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 'view' => 'admin::dashboard.index',
             ])->name('admin.dashboard.index');
 
-            // Customer Management Routes
+            //Customer Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index',
             ])->name('admin.customer.index');
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 'view' => 'admin::customers.reviews.index',
             ])->name('admin.customer.review.index');
 
-            // Customer's addresses routes
+            //Customer's addresses routes
             Route::get('customers/{id}/addresses', 'Webkul\Admin\Http\Controllers\Customer\AddressController@index')->defaults('_config', [
                 'view' => 'admin::customers.addresses.index',
             ])->name('admin.customer.addresses.index');
@@ -111,14 +111,6 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
             Route::post('customers/{id}/addresses', 'Webkul\Admin\Http\Controllers\Customer\AddressController@massDestroy')->defaults('_config', [
                 'redirect' => 'admin.customer.addresses.index',
             ])->name('admin.customer.addresses.massdelete');
-
-            // Customer's invoices route
-            Route::get('customers/{id}/invoices', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@invoices')->name('admin.customer.invoices.data');
-
-            // Customer's orders route
-            Route::get('customers/{id}/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@orders')->defaults('_config', [
-                'view' => 'admin::customers.orders.index',
-            ])->name('admin.customer.orders.data');
 
             // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
@@ -258,21 +250,6 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
                 Route::get('/refunds/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\RefundController@view')->defaults('_config', [
                     'view' => 'admin::sales.refunds.view',
                 ])->name('admin.sales.refunds.view');
-
-                // Sales Transactions Routes
-                Route::get('/transactions', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@index')->defaults('_config', [
-                    'view' => 'admin::sales.transactions.index',
-                ])->name('admin.sales.transactions.index');
-
-                Route::get('/transactions/create', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@create')->defaults('_config', [
-                    'view' => 'admin::sales.transactions.create',
-                ])->name('admin.sales.transactions.create');
-
-                Route::post('/transactions/create', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@store')->name('admin.sales.transactions.store');
-
-                Route::get('/transactions/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\TransactionController@view')->defaults('_config', [
-                    'view' => 'admin::sales.transactions.view',
-                ])->name('admin.sales.transactions.view');
             });
 
             // Catalog Routes

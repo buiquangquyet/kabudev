@@ -59,8 +59,6 @@
                 <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
             </div>
 
-            {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
-
             {{-- <div class="signup-confirm" :class="[errors.has('agreement') ? 'has-error' : '']">
                 <span class="checkbox">
                     <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required'">
@@ -77,12 +75,6 @@
                 <label class="checkbox-view" for="checkbox1"></label>
                 Checkbox Value 1
             </span> --}}
-
-            <div class="control-group">
-
-                {!! Captcha::render() !!}
-
-            </div>
 
             @if (core()->getConfigData('customer.settings.newsletter.subscription'))
                 <div class="control-group">
@@ -103,9 +95,3 @@
     {!! view_render_event('bagisto.shop.customers.signup.after') !!}
 </div>
 @endsection
-
-@push('scripts')
-
-{!! Captcha::renderJS() !!}
-
-@endpush

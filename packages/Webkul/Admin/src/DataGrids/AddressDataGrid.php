@@ -2,32 +2,26 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Ui\DataGrid\DataGrid;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
 
 class AddressDataGrid extends DataGrid
 {
-    use ProvideDataGridPlus;
-
     /**
-     * Index.
-     *
      * @var string
      */
     public $index = 'address_id';
 
+
     /**
-     * Sort order.
-     *
      * @var string
      */
     protected $sortOrder = 'desc';
 
     /**
-     * CustomerRepository $customerRepository
+     * CustomerRepository object
      *
      * @var object
      */
@@ -46,11 +40,6 @@ class AddressDataGrid extends DataGrid
         parent::__construct();
     }
 
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $customer = $this->customerRepository->find(request('id'));
@@ -62,9 +51,9 @@ class AddressDataGrid extends DataGrid
             ->where('ca.address_type', CustomerAddress::ADDRESS_TYPE)
             ->where('c.id', $customer->id);
 
-        $queryBuilder = $queryBuilder->leftJoin('country_states', function ($qb) {
+        $queryBuilder = $queryBuilder->leftJoin('country_states', function($qb) {
             $qb->on('ca.state', 'country_states.code')
-                ->on('countries.id', 'country_states.country_id');
+               ->on('countries.id', 'country_states.country_id');
         });
 
         $queryBuilder->groupBy('ca.id')
@@ -81,11 +70,6 @@ class AddressDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    /**
-     * Add columns.
-     *
-     * @return void
-     */
     public function addColumns()
     {
         $this->addColumn([
@@ -149,7 +133,7 @@ class AddressDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'closure'    => true,
-            'wrapper'    => function ($row) {
+            'wrapper'    => function($row) {
                 if ($row->default_address == 1) {
                     return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
                 } else {
@@ -159,11 +143,6 @@ class AddressDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
     public function prepareActions()
     {
         $this->addAction([
@@ -182,11 +161,6 @@ class AddressDataGrid extends DataGrid
         ]);
     }
 
-    /**
-     * Prepare mass actions.
-     *
-     * @return void
-     */
     public function prepareMassActions()
     {
         $this->addMassAction([

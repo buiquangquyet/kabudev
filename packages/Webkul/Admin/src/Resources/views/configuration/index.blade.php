@@ -7,9 +7,14 @@
 @section('content')
     <div class="content">
         @php
-            $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-            $channel = core()->getRequestedChannelCode();
-            $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
+            $locale = request()->get('locale') ?: app()->getLocale();
+            $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+            $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales;
+
+            if (! $channelLocales->contains('code', $locale)) {
+                $locale = config('app.fallback_locale');
+            }
         @endphp
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
@@ -66,7 +71,7 @@
 
                                     @foreach ($item['fields'] as $field)
 
-                                        @include ('admin::configuration.field-type')
+                                        @include ('admin::configuration.field-type', ['field' => $field])
 
                                         @php ($hint = $field['title'] . '-hint')
                                         @if ($hint !== __($hint))

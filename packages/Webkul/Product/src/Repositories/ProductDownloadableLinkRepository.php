@@ -3,24 +3,22 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Str;
 
 class ProductDownloadableLinkRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify Model class name
      *
      * @return string
      */
-    public function model()
+    function model()
     {
         return 'Webkul\Product\Contracts\ProductDownloadableLink';
     }
 
     /**
-     * Upload.
-     *
      * @param  array  $data
      * @param  integer $productId
      * @return array
@@ -30,7 +28,7 @@ class ProductDownloadableLinkRepository extends Repository
         foreach ($data as $type => $file) {
             if (request()->hasFile($type)) {
                 return [
-                    $type           => $path = request()->file($type)->store('product_downloadable_links/' . $productId, 'private'),
+                    $type           => $path = request()->file($type)->store('product_downloadable_links/' . $productId),
                     $type . '_name' => $file->getClientOriginalName(),
                     $type . '_url'  => Storage::url($path),
                 ];
@@ -41,10 +39,8 @@ class ProductDownloadableLinkRepository extends Repository
     }
 
     /**
-     * Save links.
-     *
      * @param  array  $data
-     * @param  \Webkul\Product\Models\Product  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function saveLinks(array $data, $product)

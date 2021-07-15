@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'Asia/Kolkata'),
+    'timezone' => env('APP_TIMEZONE','Asia/Kolkata'),
 
     /*
     |--------------------------------------------------------------------------
@@ -160,7 +160,7 @@ return [
     /*
         Code Editor
     */
-    'editor' => 'vscode',
+    'editor' =>'vscode',
 
     /*
         Application Version
@@ -297,11 +297,6 @@ return [
 
     'aliases' => [
 
-        /**
-         * Laravel
-         *
-         * Place your aliases in alphabetical order.
-         */
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -335,25 +330,18 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        /**
-         * Bagisto
-         *
-         * Place your aliases in alphabetical order.
-         */
-        'Captcha' => Webkul\Customer\Facades\Captcha::class,
-        'Cart' => Webkul\Checkout\Facades\Cart::class,
-        'Concord' => Konekt\Concord\Facades\Concord::class,
-        'Core' => Webkul\Core\Facades\Core::class,
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
-        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Helper'  => Konekt\Concord\Facades\Helper::class,
-        'Image' => Intervention\Image\Facades\Image::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
-        'ProductImage' => Webkul\Product\Facades\ProductImage::class,
         'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
-        'ProductVideo' => Webkul\Product\Facades\ProductVideo::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Cart' => Webkul\Checkout\Facades\Cart::class,
+        'Core' => Webkul\Core\Facades\Core::class,
+        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Concord' => Konekt\Concord\Facades\Concord::class,
+        'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'ProductImage' => Webkul\Product\Facades\ProductImage::class,
+        'ProductVideo' => Webkul\Product\Facades\ProductVideo::class
     ],
 ];

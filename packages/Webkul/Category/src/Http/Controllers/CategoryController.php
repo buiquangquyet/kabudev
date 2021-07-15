@@ -81,13 +81,13 @@ class CategoryController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'slug'        => ['required', 'unique:category_translations,slug'],
+            'slug'        => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
             'name'        => 'required',
             'image.*'     => 'mimes:bmp,jpeg,jpg,png,webp',
             'description' => 'required_if:display_mode,==,description_only,products_and_description',
         ]);
 
-        $this->categoryRepository->create(request()->all());
+        $category = $this->categoryRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
@@ -119,10 +119,10 @@ class CategoryController extends Controller
      */
     public function update($id)
     {
-        $locale = core()->getRequestedLocaleCode();
+        $locale = request()->get('locale') ?: app()->getLocale();
 
         $this->validate(request(), [
-            $locale . '.slug' => ['required', function ($attribute, $value, $fail) use ($id) {
+            $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
                 if (! $this->categoryRepository->isSlugUnique($id, $value)) {
                     $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
                 }
@@ -152,11 +152,15 @@ class CategoryController extends Controller
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             try {
-                Event::dispatch('catalog.category.delete.before', $category);
+                Event::dispatch('catalog.category.delete.before', $id);
+
+                if ($category->products->count() > 0) {
+                    $category->products()->delete();
+                }
 
                 $category->delete();
 
-                Event::dispatch('catalog.category.delete.after', $category);
+                Event::dispatch('catalog.category.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
@@ -190,6 +194,10 @@ class CategoryController extends Controller
                     try {
                         $suppressFlash = true;
                         Event::dispatch('catalog.category.delete.before', $categoryId);
+
+                        if ($category->products->count() > 0) {
+                            $category->products()->delete();
+                        }
 
                         $category->delete();
 

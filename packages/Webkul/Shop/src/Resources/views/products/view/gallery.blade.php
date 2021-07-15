@@ -74,7 +74,7 @@
     </script>
 
     <script>
-        let galleryImages = @json($images);
+        var galleryImages = @json($images);
 
         Vue.component('product-gallery', {
 
@@ -122,12 +122,12 @@
 
             methods: {
                 prepareThumbs: function() {
-                    let self = this;
+                    var this_this = this;
 
-                    self.thumbs = [];
+                    this_this.thumbs = [];
 
                     this.images.forEach(function(image) {
-                        self.thumbs.push(image);
+                        this_this.thumbs.push(image);
                     });
                 },
 
@@ -194,29 +194,25 @@
                 $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
             }
 
-            @if (auth()->guard('customer')->user())
+            var wishlist = "{{ $wishListHelper->getWishlistProduct($product) ? 'true' : 'false' }}";
 
-                let wishlist = "{{ $wishListHelper->getWishlistProduct($product) ? 'true' : 'false' }}";
+            $(document).mousemove(function(event) {
+                if ($('.add-to-wishlist').length || wishlist != 0) {
+                    if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
 
-                $(document).mousemove(function(event) {
-                    if ($('.add-to-wishlist').length || wishlist != 0) {
-                        if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
+                        $(".zoomContainer").addClass("show-wishlist");
 
-                            $(".zoomContainer").addClass("show-wishlist");
-
-                        } else {
-                            $(".zoomContainer").removeClass("show-wishlist");
-                        }
-                    };
-
-                    if ($("body").hasClass("rtl")) {
-                        $(".zoomWindow").addClass("zoom-image-direction");
                     } else {
-                        $(".zoomWindow").removeClass("zoom-image-direction");
+                        $(".zoomContainer").removeClass("show-wishlist");
                     }
-                });
+                };
 
-            @endif
+                if ($("body").hasClass("rtl")) {
+                    $(".zoomWindow").addClass("zoom-image-direction");
+                } else {
+                    $(".zoomWindow").removeClass("zoom-image-direction");
+                }
+            });
         })
     </script>
 

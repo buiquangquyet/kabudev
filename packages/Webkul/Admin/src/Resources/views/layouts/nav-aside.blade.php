@@ -1,8 +1,4 @@
 <div class="aside-nav">
-
-    {{-- button for collapsing aside nav --}}
-    <nav-slide-button icon-class="accordian-left-icon"></nav-slide-button>
-
     <ul>
         @if (request()->route()->getName() != 'admin.configuration.index')
             <?php $keys = explode('.', $menu->currentKey);  ?>
@@ -34,4 +30,8 @@
             @endforeach
         @endif
     </ul>
+
+    <!-- <div class="close-nav-aside">
+        <i class="icon angle-left-icon close-icon"></i>
+    </div> -->
 </div>

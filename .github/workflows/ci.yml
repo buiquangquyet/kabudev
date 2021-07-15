@@ -4,12 +4,8 @@ on: [push, pull_request]
 
 jobs:
   tests:
-    runs-on: ${{ matrix.operating-system }}
-    strategy:
-      matrix:
-        operating-system: [ubuntu-latest]
-        php-versions: ['7.3', '7.4', '8.0']
-    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-system }}
+    name: Run tests
+    runs-on: ubuntu-latest
 
     services:
       mysql:
@@ -27,13 +23,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Setup php
+        uses: shivammathur/setup-php@v1
         with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          php-version: '7.3'
+          extensions: intl, curl, mbstring, openssl, pdo, pdo_mysql, tokenizer
 
-      - name: Set Environment
+      - name: Set environment
         run: |
           set -e
           sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
@@ -41,33 +37,24 @@ jobs:
           printf "the complete .env.testing ...\n\n"
           cat .env.testing
 
-      - name: Composer Install
+      - name: Composer install
         run: |
           set -e
-          composer install --no-cache
+          composer install --no-interaction --ansi --no-progress --no-suggest --optimize-autoloader
 
-      - name: Migrate Database
+      - name: Migrate database
         run: set -e && php artisan migrate --env=testing
 
-      - name: Seed Database
-        run: set -e && php artisan db:seed --env=testing
-
-      - name: Vendor Publish
-        run: set -e && php artisan vendor:publish --all --force --env=testing
-
-      - name: Optimize Stuffs
-        run: set -e && php artisan optimize --env=testing
-
-      - name: Execute Unit Tests
+      - name: Execute unit tests
         run: set -e && vendor/bin/codecept run unit
 
-      - name: Execute Functional Tests
+      - name: Execute functional tests
         run: set -e && vendor/bin/codecept run functional
 
-      - name: Execute Trigger Tests
+      - name: Execute trigger tests
         run: set -e && vendor/bin/codecept run trigger
 
-      - name: Persist Test Artifacts
+      - name: Persist test artifacts
         uses: actions/upload-artifact@v1
         if: always()
         with:

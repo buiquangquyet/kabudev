@@ -9,7 +9,7 @@ class Virtual extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['length', 'width', 'height', 'weight'];
+    protected $skipAttributes = ['width', 'height', 'depth', 'weight'];
 
     /**
      * These blade files will be included in product edit page
@@ -70,15 +70,5 @@ class Virtual extends AbstractType
     public function haveSufficientQuantity(int $qty): bool
     {
         return $qty <= $this->totalQuantity() ? true : false;
-    }
-
-    /**
-     * Get product maximam price
-     *
-     * @return float
-     */
-    public function getMaximamPrice()
-    {
-        return $this->product->price;
     }
 }

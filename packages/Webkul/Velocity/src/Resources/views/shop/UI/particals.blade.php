@@ -98,7 +98,7 @@
                                             </template>
                                         </select>
 
-                                        <div class="select-icon-container d-inline-block float-right">
+                                        <div class="select-icon-container">
                                             <span class="select-icon rango-arrow-down"></span>
                                         </div>
                                     </div>

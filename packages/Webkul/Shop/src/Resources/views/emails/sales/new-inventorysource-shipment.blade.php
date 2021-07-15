@@ -48,19 +48,11 @@
                 </div>
 
                 <div>
-                    {{ $order->shipping_address->address1 }}
+                    {{ $order->shipping_address->address1 }}, {{ $order->shipping_address->state }}
                 </div>
-                    
+
                 <div>
-                    {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}
-                </div>
-                    
-                <div>
-                    {{ $order->shipping_address->state }}
-                </div>
-                    
-                <div>
-                    {{ core()->country_name($order->shipping_address->country) }}
+                    {{ core()->country_name($order->shipping_address->country) }} {{ $order->shipping_address->postcode }}
                 </div>
 
                 <div>---</div>
@@ -102,19 +94,11 @@
                 </div>
 
                 <div>
-                    {{ $order->billing_address->address1 }}
+                    {{ $order->billing_address->address1 }}, {{ $order->billing_address->state }}
                 </div>
-                    
+
                 <div>
-                    {{ $order->billing_address->postcode . " " . $order->billing_address->city }}
-                </div>
-                    
-                <div>
-                    {{ $order->billing_address->state }}
-                </div>
-                    
-                <div>
-                    {{ core()->country_name($order->billing_address->country) }}
+                    {{ core()->country_name($order->billing_address->country) }} {{ $order->billing_address->postcode }}
                 </div>
 
                 <div>---</div>

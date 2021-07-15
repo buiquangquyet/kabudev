@@ -30,10 +30,10 @@ class ProductDataGrid extends DataGrid
         parent::__construct();
 
         /* locale */
-        $this->locale = core()->getRequestedLocaleCode();
+        $this->locale = request()->get('locale') ?? app()->getLocale();
 
         /* channel */
-        $this->channel = core()->getRequestedChannelCode();
+        $this->channel = request()->get('channel') ?? (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
         /* finding channel code */
         if ($this->channel !== 'all') {

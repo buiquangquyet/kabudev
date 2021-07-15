@@ -56,12 +56,6 @@
                             </span>
                         </div>
 
-                        <div class="control-group">
-
-                            {!! Captcha::render() !!}
-
-                        </div>
-
                         {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.after') !!}
 
                         <button class="theme-btn" type="submit">
@@ -75,9 +69,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-
-{!! Captcha::renderJS() !!}
-
-@endpush

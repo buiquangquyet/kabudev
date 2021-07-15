@@ -3,6 +3,7 @@
 return [
     'security-warning' => '!!!فعالیت مشکوکی یافت شد',
     'nothing-to-delete' => 'هیچ چیز برای حذف نیست',
+    'nothing-to-delete' => 'هیچ چیز برای حذف نیست',
 
     'layouts' => [
         'my-account' => 'حساب من',
@@ -34,6 +35,7 @@ return [
         'sign-in' => 'ورود',
         'sign-up' => 'ثبت نام',
         'account' => 'حساب',
+        'cart' => 'سبد خرید',
         'profile' => 'مشخصات',
         'wishlist' => 'لیست دلخواه',
         'cart' => 'سبد خرید',
@@ -59,6 +61,7 @@ return [
         'unsubscribe' => 'لغو اشتراک',
         'subscribe' => 'اشتراک در',
         'subscribed' => 'شما هم اکنون در ایمیل های اشتراک مشترک شده اید',
+        'not-subscribed' => 'شما نمی توانید به عضویت در ایمیل مشترک شوید ، پس از مدتی دوباره امتحان کنید',
         'already' => 'شما قبلاً در لیست اشتراک های ما مشترک شده اید',
         'unsubscribed' => 'شما از نامه های اشتراک مشترکاً مشترک نیستید',
         'already-unsub' => 'شما قبلاً لغو اشتراک شده اید',
@@ -71,7 +74,7 @@ return [
         'found-results' => 'نتایج جستجو یافت شد',
         'found-result' => 'نتیجه جستجو یافت شد',
         'analysed-keywords' => 'Analysed Keywords',
-        'image-search-option' => 'قابلیت جستجو براساس عکس'
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -260,14 +263,11 @@ return [
                     'submit' => 'ذخیره آدرس',
                     'success' => 'آدرس با موفقیت به روز شد.',
                 ],
-
                 'delete' => [
                     'success' => 'آدرس با موفقیت حذف شد',
                     'failure' => 'آدرس حذف نمی شود',
                     'wrong-password' => 'گذرواژه اشتباه!'
-                ],
-
-                'default-address' => 'Default Address',
+                ]
             ],
 
             'order' => [
@@ -294,7 +294,7 @@ return [
                     'placed-on' => 'قرار داده شده در',
                     'products-ordered' => 'محصولات سفارش داده شده',
                     'invoices' => 'صورت حساب',
-                    'shipments' => 'روش ارسال',
+                    'shipments' => 'حمل و نقل',
                     'SKU' => 'واحد نگهداری سهام',
                     'product-name' => 'نام',
                     'qty' => 'کمیت',
@@ -319,7 +319,7 @@ return [
                     'total-due' => 'بدهی کل',
                     'shipping-address' => 'آدرس حمل و نقل',
                     'billing-address' => 'آدرس قبض',
-                    'shipping-method' => 'روش ارسال',
+                    'shipping-method' => 'روش حمل و نقل',
                     'payment-method' => 'روش پرداخت',
                     'individual-invoice' => '#:invoice_id صورتحساب',
                     'individual-shipment' => '#:shipment_id حمل و نقل',
@@ -327,12 +327,10 @@ return [
                     'invoice-id' => 'شناسه فاکتور',
                     'order-id' => 'شماره سفارش',
                     'order-date' => 'تاریخ سفارش',
-                    'invoice-date' => 'تاریخ فاکتور',
-                    'payment-terms' => 'شرایط پرداخت',
                     'bill-to' => 'بیل به',
                     'ship-to' => 'حمل به',
                     'contact' => 'تماس',
-                    'refunds' => 'برگشت داده شده',
+                    'refunds' => 'بازپرداخت',
                     'individual-refund' => '#:refund_id بازپرداخت',
                     'adjustment-refund' => 'بازپرداخت تنظیم',
                     'adjustment-fee' => 'هزینه تنظیم',
@@ -387,16 +385,7 @@ return [
 
                 'view' => [
                     'page-tile' => '#:id بررسی',
-                ],
-
-                'delete' => [
-                    'confirmation-message' => 'آیا شما مطمئن هستید که می خواهید این نظر را حذف کنید؟',
-                ],
-
-                'delete-all' => [
-                    'title' => 'حذف همه',
-                    'confirmation-message' => 'آیا مطمئن هستید که می خواهید همه بررسی ها را حذف کنید؟',
-                ],
+                ]
             ]
         ]
     ],
@@ -451,11 +440,10 @@ return [
         'total-amount' => 'مقدار کل',
         'none' => 'هیچ یک',
         'available-for-order' => 'Available for Order',
-        'settings' => 'تنظیمات ها',
-        'compare_options' => 'قابلیت مقایشه محصولات',
-        'wishlist-options' => 'قابلیت لیست علاقه مندیها',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
         'offers' => 'Buy :qty for :price each and save :discount%',
-        'tax-inclusive' => 'Inclusive of all taxes',
     ],
 
     // 'reviews' => [
@@ -511,7 +499,7 @@ return [
             'event' => [
                 'expired' => 'This event has been expired.'
             ],
-            'minimum-order-message' => 'حداقل مقدار سفارش است :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -521,7 +509,7 @@ return [
             'payment' => 'پرداخت',
             'complete' => 'تکمیل',
             'review' => 'مرور',
-            'billing-address' => 'آدرس صورتحساب',
+            'billing-address' => 'آدرس قبض',
             'sign-in' => 'ورود',
             'company-name' => 'نام شرکت',
             'first-name' => 'نام کوچک',
@@ -535,7 +523,7 @@ return [
             'phone' => 'تلفن',
             'country' => 'کشور',
             'order-summary' => 'خلاصه سفارش',
-            'shipping-address' => 'آدرس ارسال',
+            'shipping-address' => 'آدرس حمل و نقل',
             'use_for_shipping' => 'حمل به این آدرس',
             'continue' => 'ادامه هید',
             'shipping-method' => 'نحوه ارسال را انتخاب کنید',
@@ -544,6 +532,8 @@ return [
             'summary' => 'خلاصه سفارش',
             'price' => 'قیمت',
             'quantity' => 'مقدار',
+            'billing-address' => 'آدرس قبض',
+            'shipping-address' => 'آدرس حمل و نقل',
             'contact' => 'تماس',
             'place-order' => 'ترتیب سفارش',
             'new-address' => 'آدرس جدید را اضافه کنید',
@@ -604,7 +594,7 @@ return [
             'shipping-address' => 'آدرس حمل و نقل',
             'billing-address' => 'آدرس قبض',
             'contact' => 'تماس',
-            'shipping' => 'روش ارسال',
+            'shipping' => 'روش حمل و نقل',
             'payment' => 'روش پرداخت',
             'price' => 'قیمت',
             'quantity' => 'مقدار',
@@ -631,10 +621,10 @@ return [
                 'dear' => ':customer_name عزیز',
                 'greeting' => ':created_at والمقدم في #:order_id  تم إلغاء الطلب الذي يحمل رقم الطلب',
                 'summary' => 'خلاصه سفارش',
-                'shipping-address' => 'آدرس ارسال',
+                'shipping-address' => 'آدرس حمل و نقل',
                 'billing-address' => 'آدرس قبض',
                 'contact' => 'مخاطب',
-                'shipping' => 'روش ارسال',
+                'shipping' => 'روش حمل و نقل',
                 'payment' => 'روش پرداخت',
                 'subtotal' => 'فرعی',
                 'shipping-handling' => 'حمل و نقل و جابجایی',
@@ -654,11 +644,11 @@ return [
         ],
 
         'shipment' => [
-            'heading' => 'روش ارسال #:shipment_id  برای سفارش تولید شده است #:order_id',
-            'inventory-heading' => 'روش ارسال جدید #:shipment_id برای سفارش تولید شده است #:order_id',
-            'subject' => 'روش ارسالل برای سفارش شما #:order_id',
+            'heading' => 'حمل و نقل #:shipment_id  برای سفارش تولید شده است #:order_id',
+            'inventory-heading' => 'حمل و نقل جدید #:shipment_id برای سفارش تولید شده است #:order_id',
+            'subject' => 'حمل و نقل برای سفارش شما #:order_id',
             'inventory-subject' => 'محموله جدید برای سفارش تولید شده است #:order_id',
-            'summary' => 'خلاصه روش ارسال',
+            'summary' => 'خلاصه حمل و نقل',
             'carrier' => 'حامل',
             'tracking-number' => 'شماره پیگیری',
             'greeting' => 'یک سفارش :order_id قرار داده شده است :created_at',

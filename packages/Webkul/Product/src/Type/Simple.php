@@ -63,14 +63,4 @@ class Simple extends AbstractType
 
         return $qty <= $this->totalQuantity() ? true : $backorders;
     }
-
-    /**
-     * Get product maximam price
-     *
-     * @return float
-     */
-    public function getMaximamPrice()
-    {
-        return $this->product->price;
-    }
 }

@@ -25,7 +25,7 @@ class Grouped extends AbstractType
      *
      * @var array
      */
-    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'length', 'width', 'height', 'weight'];
+    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'];
 
     /**
      * These blade files will be included in product edit page
@@ -121,7 +121,7 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Get product minimal price.
+     * Get product minimal price
      *
      * @return float
      */
@@ -130,14 +130,14 @@ class Grouped extends AbstractType
         $minPrices = [];
 
         foreach ($this->product->grouped_products as $groupOptionProduct) {
-            $groupOptionProductTypeInstance = $groupOptionProduct->associated_product->getTypeInstance();
-
-            $groupOptionProductMinimalPrice = $groupOptionProductTypeInstance->getMinimalPrice();
-
-            $minPrices[] = $groupOptionProductTypeInstance->evaluatePrice($groupOptionProductMinimalPrice);
+            $minPrices[] = $groupOptionProduct->associated_product->getTypeInstance()->getMinimalPrice();
         }
 
-        return empty($minPrices) ? 0 : min($minPrices);
+        if (empty($minPrices)) {
+            return 0;
+        }
+
+        return min($minPrices);
     }
 
     /**
@@ -182,9 +182,8 @@ class Grouped extends AbstractType
     {
         $html = '';
 
-        if ($this->checkGroupProductHaveSpecialPrice()) {
+        if ($this->checkGroupProductHaveSpecialPrice())
             $html .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
-        }
 
         $html .= '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
         . ' '

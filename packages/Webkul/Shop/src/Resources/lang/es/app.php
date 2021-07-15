@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'invalid_vat_format' => 'El ID de IVA tiene un formato incorrecto',
     'security-warning' => 'Actividad sospechosa detectada!!!',
     'nothing-to-delete' => 'Nada que eliminar',
 
@@ -17,8 +16,7 @@ return [
 
     'common' => [
         'error' => 'Algo ha ido mal, por favor prueba más tarde.',
-        'image-upload-limit' => 'El tamaño máximo de carga de la imagen es de 2 MB',
-        'no-result-found' => 'No pudimos encontrar ningún registro.'
+        'image-upload-limit' => 'El tamaño máximo de carga de la imagen es de 2 MB'
     ],
 
     'home' => [
@@ -35,7 +33,7 @@ return [
         'sign-in' => 'Entrar',
         'sign-up' => 'Regístrate',
         'account' => 'Cuenta',
-        'cart' => 'Carrito',
+        'cart' => 'Cesta',
         'profile' => 'Perfil',
         'wishlist' => 'Lista de deseos',
         'logout' => 'Salir',
@@ -43,14 +41,14 @@ return [
     ],
 
     'minicart' => [
-        'view-cart' => 'Ver Carrito',
+        'view-cart' => 'Ver Cesta',
         'checkout' => 'Hacer pedido',
-        'cart' => 'Carrito',
+        'cart' => 'Cesta',
         'zero' => '0'
     ],
 
     'footer' => [
-        'subscribe-newsletter' => 'Suscribirse al Boletín Informativo',
+        'subscribe-newsletter' => 'Suscríbete a la Newsletter',
         'subscribe' => 'Suscríbete',
         'locale' => 'Idioma',
         'currency' => 'Moneda',
@@ -59,9 +57,9 @@ return [
     'subscription' => [
         'unsubscribe' => 'Darse de baja',
         'subscribe' => 'Suscríbete',
-        'subscribed' => 'Te has suscrito al boletín',
-        'not-subscribed' => 'No se pudo suscribir al boletín, inténtalo de nuevo más tarde',
-        'already' => 'Ya estás suscrito a nuestra lista de suscripciones.',
+        'subscribed' => 'Te has suscrito a la newsletter',
+        'not-subscribed' => 'No se pudo suscribir a la newsletter, inténtalo de nuevo más tarde',
+        'already' => 'Ya estás suscrito',
         'unsubscribed' => 'Te has desuscrito',
         'already-unsub' => 'Ya estás desuscrito',
         'not-subscribed' => '¡Error! El correo no se puede enviar actualmente, inténtalo de nuevo más tarde'
@@ -69,11 +67,11 @@ return [
 
     'search' => [
         'no-results' => 'No hay resultados',
-        'page-title' => config('app.name') . ' - Buscar',
-        'found-results' => 'Resultados de la Búsqueda',
-        'found-result' => 'Resultado de la Búsqueda',
-        'analysed-keywords' => 'Palabras claves Analizadas',
-        'image-search-option' => 'Opción de Búsqueda de Imágenes'
+        'page-title' => 'Búsqueda',
+        'found-results' => 'No hay resultados de búsqueda',
+        'found-result' => 'Resultados de la búsqueda',
+        'analysed-keywords' => 'Analysed Keywords',
+        'image-search-option' => 'Image Search Option'
     ],
 
     'reviews' => [
@@ -86,9 +84,9 @@ return [
         'submit' => 'ENVIAR',
         'delete-all' => 'Todas las opiniones se han eliminado con éxito',
         'ratingreviews' => ':rating calificaciones & :review opiniones',
-        'star' => 'Inicio',
+        'star' => 'Star',
         'percentage' => ':percentage %',
-        'id-star' => 'inicio',
+        'id-star' => 'star',
         'name' => 'Nombre'
     ],
 
@@ -102,8 +100,8 @@ return [
             'removed'               => 'Elemento eliminado con éxito de la lista de comparación',
             'removed-all'           => 'Todos los elementos eliminados correctamente de la lista de comparación',
             'empty-text'            => "No tienes ningún artículo en tu lista de comparación",
-            'product_image'         => 'Imagen del Producto',
-            'actions'               => 'Acciones',
+            'product_image'         => 'Product Image',
+            'actions'               => 'Actions',
         ],
 
         'signup-text' => [
@@ -125,7 +123,6 @@ return [
             'conditions' => 'Condiciones',
             'using' => 'Mediante el uso de este sitio web',
             'agreement' => 'Acuerdo',
-            'subscribe-to-newsletter' => 'Suscríbete al boletín',
             'success' => 'Cuenta creada exitosamente',
             'success-verify' => 'Cuenta creada con éxito, se ha enviado un correo electrónico para su verificación.',
             'success-verify-email-unsent' => 'Cuenta creada correctamente, pero no se envió el correo electrónico de verificación',
@@ -229,16 +226,11 @@ return [
                     'contact' => 'Contacto',
                     'confirm-delete' =>  '¿Quieres eleminar esta dirección?',
                     'default-delete' => 'La dirección por defecto no puede ser cambiada',
-                    'enter-password' => 'Ingresa tu contraseña.',
+                    'enter-password' => 'Enter Your Password.',
                 ],
 
                 'create' => [
                     'page-title' => 'Cliente - Formulario de dirección',
-                    'company_name' => 'Nombre de la empresa',
-                    'first_name' => 'Nombres',
-                    'last_name' => 'Apellidos',
-                    'vat_id' => 'ID de IVA',
-                    'vat_help_note' => '[Nota: Utilice el Código de País con el ID de IVA Ej. INV01234567891]',
                     'title' => 'Añadir dirección',
                     'street-address' => 'Calle',
                     'country' => 'País',
@@ -254,23 +246,16 @@ return [
 
                 'edit' => [
                     'page-title' => 'Cliente - Editar Dirección',
-                    'company_name' => 'Nombre de la empresa',
-                    'first_name' => 'Nombres',
-                    'last_name' => 'Apellidos',
-                    'vat_id' => 'ID de IVA',
                     'title' => 'Editar Dirección',
                     'street-address' => 'Calle',
                     'submit' => 'Guardar dirección',
                     'success' => 'Dirección actualizada exitosamente.',
                 ],
-
                 'delete' => [
                     'success' => 'Dirección eliminada correctamente',
                     'failure' => 'La dirección no puede ser eliminada',
-                    'wrong-password' => 'Contraseña Incorrecta !'
-                ],
-
-                'default-address' => 'Default Address',
+                    'wrong-password' => 'Wrong Password !'
+                ]
             ],
 
             'order' => [
@@ -282,13 +267,13 @@ return [
                     'status' => 'Estado',
                     'total' => 'Total',
                     'order_number' => 'Número de pedido',
-                    'processing' => 'Porcesando',
-                    'completed' => 'Completado',
-                    'canceled' => 'Cancelado',
-                    'closed' => 'Cerrado',
-                    'pending' => 'Pendiente',
-                    'pending-payment' => 'Pago Pendiente',
-                    'fraud' => 'Fraude'
+                    'processing' => 'Processing',
+                    'completed' => 'Completed',
+                    'canceled' => 'Canceled',
+                    'closed' => 'Closed',
+                    'pending' => 'Pending',
+                    'pending-payment' => 'Pending Payment',
+                    'fraud' => 'Fraud'
                 ],
 
                 'view' => [
@@ -306,15 +291,14 @@ return [
                     'item-invoice' => 'Facturado (:qty_invoiced)',
                     'item-shipped' => 'Enviado (:qty_shipped)',
                     'item-canceled' => 'Cancelado (:qty_canceled)',
-                    'item-refunded' => 'Reembolsado (:qty_refunded)',
                     'price' => 'Precio',
                     'total' => 'Total',
                     'subtotal' => 'Total parcial',
                     'shipping-handling' => 'Envío y Manipulación',
                     'tax' => 'Impuesto',
                     'discount' => 'Descuento',
-                    'tax-percent' => 'Porcentaje de Impuestos',
-                    'tax-amount' => 'Importe del Impuesto',
+                    'tax-percent' => 'Porcentaje IVA',
+                    'tax-amount' => 'Cantidad impuesto',
                     'discount-amount' => 'Cantidad descontada',
                     'grand-total' => 'Total',
                     'total-paid' => 'Total 	Pago',
@@ -330,17 +314,10 @@ return [
                     'invoice-id' => 'Factura Id',
                     'order-id' => 'Pedido Id',
                     'order-date' => 'Fecha pedido',
-                    'invoice-date' => 'Fecha de la factura',
-                    'payment-terms' => 'Términos de pago',
                     'bill-to' => 'Facturar a',
                     'ship-to' => 'Envío a',
                     'contact' => 'Contacto',
-                    'refunds' => 'Reembolsos',
-                    'individual-refund' => 'Reembolso #:refund_id',
-                    'adjustment-refund' => 'Reembolso de Ajuste',
-                    'adjustment-fee' => 'Tarifa de Ajuste',
-                    'cancel-btn-title' => 'Cancelar',
-                    'tracking-number' => 'Número de Rastreo',
+                    'tracking-number' => 'Tracking Number',
                     'cancel-confirm-msg' => 'Estás segura de que deseas cancelar este pedido ?'
                 ]
             ],
@@ -349,15 +326,14 @@ return [
                 'page-title' => 'Cliente - Lista de deseos',
                 'title' => 'Lista de deseos',
                 'deleteall' => 'Eliminar todo',
-                'moveall' => 'Mover todos los productos al carrito',
-                'move-to-cart' => 'Mover al carrito',
+                'moveall' => 'Mover todos los productos a la cesta',
+                'move-to-cart' => 'Mover a la cesta',
                 'error' => 'No se puede agregar el producto a la lista de deseos por problemas desconocidos, inténtelo más tarde.',
                 'add' => 'Artículo añadido a la lista de deseos',
                 'remove' => 'Artículo eliminado de la lista de deseos',
                 'add-wishlist-text'     => 'Añadir producto a la lista de deseos',
                 'remove-wishlist-text'  => 'Eliminar producto de la lista de deseos',
-                'moved' => 'Artículo movido al carrito exitosamente',
-                'option-missing' => 'Faltan opciones del producto, por lo que el artículo no se puede mover a la lista de deseos.',
+                'moved' => 'Artículo movido a la cesta exitosamente',
                 'move-error' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
                 'success' => 'Artículo añadido a la lista de deseos',
                 'failure' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
@@ -380,7 +356,7 @@ return [
                 'remaining-downloads' => 'Descargas restantes',
                 'unlimited' => 'Ilimitado',
                 'download-error' => 'El enlace de descarga ha caducado.',
-                'payment-error' => 'No se ha realizado el pago de esta descarga.'
+                'payment-error' => 'Payment has not been done for this download.'
             ],
 
             'review' => [
@@ -391,16 +367,7 @@ return [
 
                 'view' => [
                     'page-tile' => 'Opinión #:id',
-                ],
-
-                'delete' => [
-                    'confirmation-message' => '¿Seguro que quieres eliminar esta crítica?',
-                ],
-
-                'delete-all' => [
-                    'title' => 'Eliminar todos',
-                    'confirmation-message' => '¿Estás segura de que quieres eliminar todas las críticas?',
-                ],
+                ]
             ]
         ]
     ],
@@ -417,12 +384,12 @@ return [
         'oldest-first' => 'Lo más antiguo primero',
         'cheapest-first' => 'Lo más barato primero',
         'expensive-first' => 'Lo más caro primero',
-        'show' => 'Mostrar',
+        'show' => 'Show',
         'pager-info' => 'Mostrar :showing of :total Items',
         'description' => 'Descripción',
         'specification' => 'Especificaciones',
-        'total-reviews' => ':total Reseñas',
-        'total-rating' => ':total_rating Calidifcaciones & :total_reviews Reseñas',
+        'total-reviews' => ':total Reviews',
+        'total-rating' => ':total_rating Ratings & :total_reviews Reviews',
         'by' => 'Por :name',
         'up-sell-title' => '¡Hemos encontrado otros productos que te pueden gustar!',
         'related-product-title' => 'Productos relacionados',
@@ -433,33 +400,21 @@ return [
         'sale' => 'En venta',
         'new' => 'Nuevo',
         'empty' => 'No hay prodcutos disponibles en esta categoría',
-        'add-to-cart' => 'Añadir al carrito',
+        'add-to-cart' => 'Añadir a la cesta',
         'book-now' => 'reservar ahora',
         'buy-now' => 'Comprar ahora',
         'whoops' => 'Ups!',
         'quantity' => 'Cantidad',
-        'in-stock' => 'Disponible',
-        'out-of-stock' => 'No disponible',
+        'in-stock' => 'En estoc',
+        'out-of-stock' => 'Sin estoc',
         'view-all' => 'Ver todo',
         'select-above-options' => 'Primero selecciona las opciones de arriba.',
         'less-quantity' => 'La cantidad no debe ser inferior a uno.',
-        'samples' => 'Muestras',
-        'links' => 'Enlaces',
-        'sample' => 'Muestra',
-        'name' => 'Nombre',
-        'qty' => 'Cant',
-        'starting-at' => 'A partir de',
-        'customize-options' => 'Personalizar Opciones',
-        'choose-selection' => 'Elija una selección',
-        'your-customization' => 'Tu Personalización',
-        'total-amount' => 'Cantidad Total',
-        'none' => 'Ninguno',
         'available-for-order' => 'Disponible para ordenar',
-        'settings' => 'Ajustes',
-        'compare_options' => 'Comparar Optiones',
-        'wishlist-options' => 'Opciones de Lista de Deseos',
-        'offers' => 'Compre :qty por :price cada uno y ahorre :discount%',
-        'tax-inclusive' => 'Inclusive of all taxes',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
+        'wishlist-options' => 'Wishlist Options',
+        'offers' => 'Buy :qty for :price each and save :discount%',
     ],
 
     // 'reviews' => [
@@ -476,14 +431,11 @@ return [
             'integrity' => [
                 'missing_fields' =>'Faltan algunos campos requeridos',
                 'missing_options' =>'Faltan opciones configurables del producto',
-                'missing_links' => 'Faltan enlaces descargables para este producto.',
-                'qty_missing' => 'Al menos un producto debe tener más de 1 cantidad.',
-                'qty_impossible' => 'No se pueden agregar más de uno de estos productos al carrito.'
             ],
-            'create-error' => 'Se encontraron problemas con el carrito de compra',
-            'title' => 'Carrito de la compra',
-            'empty' => 'Tu carrito está vacía',
-            'update-cart' => 'Actualizar carrito',
+            'create-error' => 'Se encontraron problemas con la cesta de compra',
+            'title' => 'Cesta de la compra',
+            'empty' => 'Tu cesta está vacía',
+            'update-cart' => 'Actualizar cesta',
             'continue-shopping' => 'Seguir comprando',
             'proceed-to-checkout' => 'Continuar con el pago',
             'remove' => 'Eliminar',
@@ -491,21 +443,21 @@ return [
             'move-to-wishlist' => 'Mover a la lista de deseos',
             'move-to-wishlist-success' => 'Artículo movido a la lista de deseos',
             'move-to-wishlist-error' => 'El artículo no se puede añadir a la lista de deseos, por favor inténtalo más tarde',
-            'add-config-warning' => 'Por favor selecciona las opciones antes de añadir al carrito',
+            'add-config-warning' => 'Por favor selecciona las opciones antes de añadir a la cesta',
             'quantity' => [
                 'quantity' => 'Cantidad',
-                'success' => 'Carrito actualizada exitosamente',
+                'success' => 'Cesta actualizada exitosamente',
                 'illegal' => 'La cantidad no puede ser menor que uno',
                 'inventory_warning' => 'La cantidad solicitada no está disponible, inténtelo más tarde',
                 'error' => 'No se pueden actualizar los artículos, inténtelo más tarde'
             ],
             'item' => [
-                'error_remove' => 'No hay artículos que eliminar en el carrito',
-                'success' => 'El artículo se añadió al carrito',
-                'success-remove' => 'El artículo se eliminó del carrito',
-                'error-add' => 'El artículo no se puede añadir al carrito, inténtelo más tarde',
-                'inactive' => 'Un artículo está inactivo y se eliminó del carrito.',
-                'inactive-add' => 'El artículo inactivo no se puede agregar al carrito',
+                'error_remove' => 'No hay artículos que eliminar en la cesta',
+                'success' => 'El artículp se añadió a la cesta',
+                'success-remove' => 'El artículo se eliminó de la cesta',
+                'error-add' => 'El artículo no se puede añadir a la cesta, inténtelo más tarde',
+                'inactive' => 'An item is inactive and was removed from cart',
+                'inactive-add' => 'Inactive item cannot be added to cart',
             ],
             'quantity-error' => 'La cantidad solicitada no está disponible',
             'cart-subtotal' => 'Total parcial',
@@ -514,7 +466,7 @@ return [
             'event' => [
                 'expired' => 'This event has been expired.'
             ],
-            'minimum-order-message' => 'La cantidad mínima de pedido es :amount'
+            'minimum-order-message' => 'Minimum order amount is :amount'
         ],
 
         'onepage' => [
@@ -526,7 +478,6 @@ return [
             'review' => 'revisión',
             'billing-address' => 'Dirección de facturación',
             'sign-in' => 'Entrar',
-            'company-name' => 'Nombre de la empresa',
             'first-name' => 'Nombre',
             'last-name' => 'Apellido',
             'email' => 'Correo electrónico',
@@ -564,10 +515,7 @@ return [
             'money-desc' => 'Transferencia bancaria',
             'paypal-desc' => 'Paypal',
             'free-desc' => 'Envío gratuito',
-            'flat-desc' => 'Esta es una tarifa plana',
-            'password' => 'Contraseña',
-            'login-exist-message' => 'Ya tienes una cuenta con nosotros, inicia sesión o continúa como invitado .',
-            'enter-coupon-code' => 'Introduce el Código de Cupón'
+            'flat-desc' => 'Esta es una tarifa plana'
         ],
 
         'total' => [
@@ -583,10 +531,7 @@ return [
             'coupon' => 'Cupón',
             'coupon-applied' => 'Cupón aplicado',
             'remove-coupon' => 'Eliminar cupón',
-            'cannot-apply-coupon' => 'No se puede aplicar cupón',
-            'invalid-coupon' => 'El código del cupón no es válido.',
-            'success-coupon' => 'Código del cupón aplicado correctamente.',
-            'coupon-apply-issue' => 'No se puede aplicar el código de cupón.'
+            'cannot-apply-coupon' => 'No se puede aplicar cupón'
         ],
 
         'success' => [
@@ -652,7 +597,7 @@ return [
             ]
         ],
         'invoice' => [
-            'heading' => 'Tu factura #:invoice_id para el pedido#:order_id',
+            'heading' => 'Tu factura #:invoice_id for Order #:order_id',
             'subject' => 'Factura de tu pedido #:order_id',
             'summary' => 'Resumen de pedido',
         ],
@@ -666,15 +611,6 @@ return [
             'tracking-number' => 'Número de seguimiento',
             'greeting' => 'El pedido :order_id ha sido enviado a :created_at',
         ],
-
-        'refund' => [
-            'heading' => 'Su Reembolso #:refund_id para el pedido #:order_id',
-            'subject' => 'Reembolso de su pedido #:order_id',
-            'summary' => 'Resumen de Reembolso',
-            'adjustment-refund' => 'Reembolso de Ajuste',
-            'adjustment-fee' => 'Tarifa de Ajuste'
-        ],
-
         'forget-password' => [
             'subject' => 'Restablecer contraseña cliente',
             'dear' => 'Estimado/a :name',
@@ -695,7 +631,7 @@ return [
                 'username-email' => 'Nombre de usuario/Email',
                 'subject' => 'Nuevo registro de cliente',
                 'password' => 'Contraseña',
-                'summary' => 'Tu cuenta ha sido creada.
+                'summary' => 'Tu cuenta ha sido creada en Bassar.
                 Los detalles de tu cuenta puedes verlos abajo: ',
                 'thanks' => '¡Gracias!',
             ],
@@ -705,23 +641,23 @@ return [
                 'customer-registration' => 'Cliente registrado exitosamente',
                 'dear' => 'Estimado/a :customer_name',
                 'greeting' => '¡Bienvenido y gracias por registrarte en Bassar!',
-                'summary' => 'Su cuenta se ha creado con éxito y puede iniciar sesión con su dirección de correo electrónico y su contraseña. Al iniciar sesión, podrá acceder a otros servicios, incluida la revisión de pedidos anteriores, listas de deseos y la edición de la información de su cuenta.',
+                'summary' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
                 'thanks' => '¡Gracias!',
             ],
 
             'verification' => [
-                'heading' => config('app.name') . ' - Verificación por correo',
+                'heading' => 'Bassar - Verificación por correo',
                 'subject' => 'Verificación por correo',
                 'verify' => 'Verifica tu cuenta',
                 'summary' => 'Este mensaje es para verificar que esta dirección de mail es tuya.
-                Por favor, hacer click al botón de abajo para verificar tu cuenta.'
+                Por favor, clica el botón de abajo para verificar tu cuenta.'
             ],
 
             'subscription' => [
                 'subject' => 'Subscripción mail',
-                'greeting' => ' Bienvenido a ' . config('app.name') . ' - Subscripción por mail',
+                'greeting' => ' Bienvenido a Bassar - Subscripción por mail',
                 'unsubscribe' => 'Darse de baja',
-                'summary' => 'Gracias por ponernos en tu bandeja de entrada. Ha pasado un tiempo desde que leyó el último correo electrónico de ' . config('app.name') . ', y no queremos abrumar su bandeja de entrada. Si ya no quiere recibir
+                'summary' => 'Gracias por ponernos en tu bandeja de entrada. Ha pasado un tiempo desde que leyó el último correo electrónico de Bassar, y no queremos abrumar su bandeja de entrada. Si ya no quiere recibir
                 las últimas noticias de marketing, haga clic en el botón de abajo.'
             ]
         ]

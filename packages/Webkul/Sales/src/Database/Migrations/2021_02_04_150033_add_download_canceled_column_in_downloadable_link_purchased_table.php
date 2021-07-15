@@ -26,7 +26,7 @@ class AddDownloadCanceledColumnInDownloadableLinkPurchasedTable extends Migratio
     public function down()
     {
         Schema::table('downloadable_link_purchased', function (Blueprint $table) {
-            $table->dropColumn('download_canceled');
+            $table->integer('download_canceled')->default(0);
         });
     }
 }

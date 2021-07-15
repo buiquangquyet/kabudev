@@ -79,8 +79,7 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'Rabat',
-        'cms' => 'System CMS',
-        'transactions' => 'Transactions'
+        'cms' => 'System CMS'
     ],
 
     'acl' => [
@@ -194,7 +193,6 @@ return [
         'billed-to' => 'Zapłacono za',
         'shipped-to' => 'Wysłane do',
         'order-id' => 'Identyfikator zamówienia',
-        'invoice-id' => 'numer faktury',
         'invoice-date' => 'Data faktury',
         'total-qty' => 'Ilość Całkowita',
         'inventory-source' => 'Źródło zapasów',
@@ -239,9 +237,7 @@ return [
         'view' => 'Widok',
         'rtl' => 'RTL',
         'ltr' => 'LTR',
-        'update-status' => 'Aktualizcja statusu',
-        'transaction-id' => 'Transaction Id',
-        'transaction-date' => 'Transaction Date',
+        'update-status' => 'Aktualizcja statusu'
     ],
 
     'account' => [
@@ -394,8 +390,7 @@ return [
             'submit-comment' => 'Prześlij komentarz',
             'notify-customer' => 'Powiadom klienta',
             'customer-notified' => ':date | Klient <b>Powiadomiony</b>',
-            'customer-not-notified' => ':date | Klient <b>Nie powiadomiony</b>',
-            'transactions' => 'Transactions'
+            'customer-not-notified' => ':date | Klient <b>Nie powiadomiony</b>'
         ],
 
         'invoices' => [
@@ -420,10 +415,7 @@ return [
             'print' => 'Drukuj',
             'order-date' => 'Data zamówienia',
             'creation-error' => 'Tworzenie faktury za zamówienie jest niedozwolone.',
-            'product-error' => 'Faktury nie można utworzyć bez produktów.',
-            'status-overdue' => 'Overdue',
-            'status-pending' => 'Pending Payment',
-            'status-paid'    => 'Paid',
+            'product-error' => 'Faktury nie można utworzyć bez produktów.'
         ],
 
         'shipments' => [
@@ -475,28 +467,6 @@ return [
             'view-title' => 'Refundacja nr #:refund_id',
             'invalid-refund-amount-error' => 'Kwota zwrotu powinna być różna od zera.'
 
-        ],
-
-        'transactions' => [
-            'title'               => 'Transactions',
-            'create-title'        => 'Add transaction',
-            'id'                  => 'Id',
-            'transaction-id'      => 'Transaction Id',
-            'payment-method'      => 'Payment method',
-            'transaction-amount' => 'Transaction amount',
-            'action'              => 'Action',
-            'view-title'          => 'Transaction #:transaction_id',
-            'transaction-data'    => 'Transaction Data',
-            'order-id'            => 'Order Id',
-            'invoice-id' => 'Invoice Id',
-            'status'              => 'Status',
-            'created-at'          => 'Created At',
-            'transaction-details' => 'Transaction Details',
-            'response' => [
-                'invoice-missing'    => 'This invoice id does not exist',
-                'transaction-saved'  => 'The transaction has been saved',
-                'already-paid'       => 'This invoice has already been paid'
-            ]
         ]
     ],
 
@@ -874,9 +844,7 @@ return [
             'update-success' => 'Element suwaka pomyślnie zaktualizowany',
             'update-fail' => 'Nie można zaktualizować suwaka',
             'delete-success' => 'Nie można usunąć ostatniego elementu lidera',
-            'delete-fail' => 'Element suwaka został pomyślnie usunięty',
-            'expired-at'  => 'Expire Date',
-            'sort-order'  => 'Sort Order'
+            'delete-fail' => 'Element suwaka został pomyślnie usunięty'
         ],
 
         'tax-categories' => [
@@ -1419,13 +1387,9 @@ return [
             'weight-unit' => 'Jednostka wagi',
             'email-settings'    => 'Ustawienia e-mail',
             'email-sender-name' => 'Email Sender Name',
-            'email-sender-name-tip' => 'This name will be displayed in the customers inbox',
             'shop-email-from'   => 'Adres e-mail sklepu [do wysyłania wiadomości e-mail]',
-            'shop-email-from-tip' => 'The email address of this channel to send emails to your customers',
             'admin-name'    => 'Nazwa administratora',
-            'admin-name-tip'  => 'This name will be displayed in all admin emails',
             'admin-email' => 'Admin Email',
-            'admin-email-tip' => 'The email address of the admin for this channel to receive emails',
             'admin-page-limit' => 'Domyślne elementy na stronę (administratora)',
             'design' => 'Projekt',
             'admin-logo' => 'Logo administratora',
@@ -1439,25 +1403,15 @@ return [
             'order-number-length' => 'Długość numeru zamówienia',
             'order-number-suffix' => 'Sufiks numeru zamówienia”',
             'order-number-generator-class' => 'Generator numeru zamówienia',
-            'minimum-order' => 'Minimalne ustawienia zamówienia',
-            'minimum-order-amount' => 'Minimalna kwota zamówienia',
-            'invoice-settings' => 'Ustawienia faktury',
-            'invoice-number' => 'Ustawienia numeru faktury',
-            'invoice-number-prefix' => 'Prefiks numeru faktury',
-            'invoice-number-length' => 'Długość numeru faktury',
-            'invoice-number-suffix' => 'Sufiks numeru faktury',
-            'invoice-number-generator-class' => 'Generator numerów faktur',
-            'payment-terms' => 'Zasady płatności',
-            'due-duration' => 'Wymagany czas trwania',
-            'due-duration-day' => ':due-duration Dzień',
-            'due-duration-days' => ':due-duration Dni',
-            'invoice-slip-design' => 'Wzór wydruku faktury',
-            'logo' => 'Logo',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Domyślna',
             'sandbox' => 'Piaskownica',
             'all-channels' => 'Wszystkie kanały',
             'all-locales' => 'Wszystkie ustawienia regionalne',
             'all-customer-groups' => 'Wszystkie grupy klientów',
+            'invoice-slip-design' => 'Wzór wydruku faktury',
+            'logo' => 'Logo',
             'favicon' => 'Favicon',
             'seo' => 'SEO',
             'rich-snippets' => 'Rich Snippets',
@@ -1489,16 +1443,7 @@ return [
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
             'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display' => 'Allow customers to directly buy products',
-            'width' => 'Width',
-            'height' => 'Height',
-            'cache-small-image' => 'Small Image',
-            'cache-medium-image' => 'Medium Image',
-            'cache-large-image' => 'Large Image',
-            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
-            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
-            'set-order-status'   => 'Set the order status after creating the invoice to',
-            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
+            'buy-now-button-display' => 'Allow customers to directly buy products'
        ]
     ]
 ];

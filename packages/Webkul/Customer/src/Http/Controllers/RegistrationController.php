@@ -2,54 +2,54 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Cookie;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Customer\Http\Requests\CustomerRegistrationRequest;
 use Webkul\Customer\Mail\RegistrationEmail;
 use Webkul\Customer\Mail\VerificationEmail;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Shop\Mail\SubscriptionEmail;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Core\Repositories\SubscribersListRepository;
+use Cookie;
 
 class RegistrationController extends Controller
 {
     /**
-     * Contains route related configuration.
+     * Contains route related configuration
      *
      * @var array
      */
     protected $_config;
 
     /**
-     * Customer repository instance.
+     * CustomerRepository object
      *
      * @var \Webkul\Customer\Repositories\CustomerRepository
      */
     protected $customerRepository;
 
     /**
-     * Customer group repository instance.
+     * CustomerGroupRepository object
      *
      * @var \Webkul\Customer\Repositories\CustomerGroupRepository
      */
     protected $customerGroupRepository;
 
     /**
-     * Subscribers list repository instance.
+     * SubscribersListRepository
      *
      * @var \Webkul\Core\Repositories\SubscribersListRepository
      */
     protected $subscriptionRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new Repository instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
+     *
      * @return void
      */
     public function __construct(
@@ -80,12 +80,16 @@ class RegistrationController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @param  \Webkul\Customer\Http\Requests\CustomerRegistrationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(CustomerRegistrationRequest $request)
+    public function create()
     {
-        $request->validated();
+        $this->validate(request(), [
+            'first_name' => 'string|required',
+            'last_name'  => 'string|required',
+            'email'      => 'email|required|unique:customers,email',
+            'password'   => 'confirmed|min:6|required',
+        ]);
 
         $data = array_merge(request()->input(), [
             'password'          => bcrypt(request()->input('password')),
@@ -165,7 +169,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Method to verify account.
+     * Method to verify account
      *
      * @param  string  $token
      * @return \Illuminate\Http\Response
@@ -186,8 +190,6 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Resend verification email.
-     *
      * @param  string  $email
      * @return \Illuminate\Http\Response
      */

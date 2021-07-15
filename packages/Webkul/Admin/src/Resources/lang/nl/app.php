@@ -80,8 +80,7 @@ return [
         'campaigns' => 'Campaigns',
         'email-templates' => 'Email Templates',
         'discount' => 'Korting',
-        'cms' => 'CMS',
-        'transactions' => 'Transacties'
+        'cms' => 'CMS'
     ],
 
     'acl' => [
@@ -196,7 +195,6 @@ return [
         'billed-to' => 'Gefactureerd aan',
         'shipped-to' => 'Verzonden naar',
         'order-id' => 'Order Id',
-        'invoice-id' => 'Factuurnummer',
         'invoice-date' => 'Factuur datum',
         'total-qty' => 'Totale hoeveelheid',
         'inventory-source' => 'Voorraad bron',
@@ -393,7 +391,6 @@ return [
             'comment' => 'Comment',
             'submit-comment' => 'Submit Comment',
             'notify-customer' => 'Notify Customer',
-            'transactions' => 'Transacties'
         ],
 
         'invoices' => [
@@ -418,10 +415,7 @@ return [
             'print' => 'Print',
             'order-date' => 'Besteldatum',
             'creation-error' => 'De bestelling staat niet toe dat er een factuur wordt aangemaakt.',
-            'product-error' => 'Zonder producten kan er geen factuur worden aangemaakt.',
-            'status-overdue'  => 'Verlopen',
-            'status-pending' => 'Wachten op betaling',
-            'status-paid'    => 'Betaald',
+            'product-error' => 'Zonder producten kan er geen factuur worden aangemaakt.'
         ],
 
         'shipments' => [
@@ -473,28 +467,6 @@ return [
             'view-title' => 'Terugbetaling #:refund_id',
             'invalid-refund-amount-error' => 'Het restitutiebedrag mag niet nul zijn.'
 
-        ],
-
-        'transactions' => [
-            'title'               => 'Transacties',
-            'create-title'        => 'Transactie toevoegen',
-            'id'                  => 'Id',
-            'transaction-id'      => 'Transactie Id',
-            'payment-method'      => 'Betalingswijze',
-            'transaction-amount'  => 'Transactiebedrag',
-            'action'              => 'Actie',
-            'view-title'          => 'Transactie #:transaction_id',
-            'transaction-data'    => 'Transactie Data',
-            'order-id'            => 'Order Id',
-            'invoice-id'          => 'Factuurnummer',
-            'status'              => 'Status',
-            'created-at'          => 'Toegevoegd op',
-            'transaction-details' => 'Transactie details',
-            'response' => [
-                'invoice-missing'    => 'Dit factuurnummer bestaat niet',
-                'transaction-saved'  => 'De transactie is geregistreerd',
-                'already-paid'       => 'Dit factuur is al voldaan'
-            ]
         ]
     ],
 
@@ -871,9 +843,7 @@ return [
             'update-success' => 'Schuifitem is bijgewerkt',
             'update-fail' => 'Schuifregelaar kan niet worden bijgewerkt',
             'delete-success' => 'Kan laatste llider-item niet verwijderen',
-            'delete-fail' => 'Schuifitem is verwijderd',
-            'expired-at'  => 'Expire Date',
-            'sort-order'  => 'Sort Order'
+            'delete-fail' => 'Schuifitem is verwijderd'
         ],
 
         'tax-categories' => [
@@ -1348,15 +1318,15 @@ return [
             'email' => 'Email',
             'notification_label' => 'Notificaties',
             'notifications' => [
-                'verification' => 'Stuur een verificatie-e-mail na registratie van de klant',
-                'registration' => 'Stuur een bevestigingsmail na registratie van de klant',
-                'customer' => 'Stuur de account gegevens van de klant na registratie',
-                'new-order' => 'Stuur een notificatie naar de klant na het plaatsen van een nieuwe bestelling',
-                'new-admin' => 'Stuur een notificatie naar de beheerder na het plaatsen van een nieuwe bestelling',
-                'new-invoice' => 'Stuur een notificatie na het aanmaken van een nieuwe factuur',
-                'new-refund' => 'Stuur een notificatie nadat u een terugbetaling heeft gemaakt',
-                'new-shipment' => 'Stuur een notificatie na het aanmaken van een zending',
-                'new-inventory-source' => 'Stuur een notificatie nadat een nieuwe voorraadbron is aangemaakt',
+                'verification' => 'Stuur verificatie E-mail',
+                'registration' => 'Verzend registratie E-mail',
+                'customer' => 'Stuur klant e-mail',
+                'new-order' => 'Stuur een e-mail ter bevestiging van de bestelling',
+                'new-admin' => 'Stuur een e-mail met de beheerdersuitnodiging',
+                'new-invoice' => 'Stuur een e-mail ter bevestiging van de factuur',
+                'new-refund' => 'Stuur een terugbetalingsmelding per e-mail',
+                'new-shipment' => 'Verzendbericht per e-mail verzenden',
+                'new-inventory-source' => 'E-mail met bronvermelding voor inventaris verzenden',
                 'cancel-order' => 'Verzenden annuleren Bestellingskennisgeving E-mail',
             ],
 
@@ -1414,15 +1384,11 @@ return [
             'footer-toggle' => 'Voettekst in- / uitschakelen',
             'locale-options' => 'Eenheid opties',
             'weight-unit' => 'Gewichtseenheid',
-            'email-settings'    => 'Email configuratie',
-            'email-sender-name' => 'Afzender',
-            'email-sender-name-tip' => 'Deze naam wordt weergegeven in de inbox van de klant',
-            'shop-email-from'   => 'Het e-mailadres van de winkel',
-            'shop-email-from-tip' => 'Het e-mailadres van dit kanaal om e-mails naar uw klanten te sturen',
-            'admin-name'    => 'Naam van de beheerder',
-            'admin-name-tip' => 'Deze naam wordt weergegeven in alle admin e-mails',
-            'admin-email' => 'Het e-mailadres van de beheerder',
-            'admin-email-tip' => 'Het e-mailadres van de beheerder voor dit kanaal om e-mails te ontvangen',
+            'email-settings'    => 'Email Settings',
+            'email-sender-name' => 'Email Sender Name',
+            'shop-email-from'   => 'Shop Email Address [For sending emails]',
+            'admin-name'    => 'Admin Name',
+            'admin-email' => 'Admin Email',
             'admin-page-limit' => 'Standaarditems per pagina (Admin)',
             'design' => 'Ontwerp',
             'admin-logo' => 'Admin Logo',
@@ -1430,41 +1396,31 @@ return [
             'credit-max' => 'Klantenkrediet Max',
             'credit-max-value' => 'Maximale kredietwaarde',
             'use-credit-max' => 'Gebruik krediet max',
-            'order-settings' => 'Order instellingen',
+            'order-settings' => 'Bestel instellingen',
             'orderNumber' => 'Instellingen voor bestelnummers',
             'order-number-prefix' => 'Bestelnummer prefix',
             'order-number-length' => 'Bestelnummer Lengte',
             'order-number-suffix' => 'Achtervoegsel bestelnummer',
             'order-number-generator-class' => 'Ordernummer Generator',
-            'minimum-order' => 'Minimale bestelling instellen',
-            'minimum-order-amount' => 'Minimaal bedrag van de bestelling',
-            'invoice-settings' => 'Factuurinstellingen',
-            'invoice-number' => 'Instellingen factuurnummer',
-            'invoice-number-prefix' => 'Voorvoegsel factuurnummer',
-            'invoice-number-length' => 'Lengte factuurnummer',
-            'invoice-number-suffix' => 'Achtervoegsel factuurnummer',
-            'invoice-number-generator-class' => 'Factuurnummergenerator',
-            'payment-terms' => 'Betaalvoorwaarden',
-            'due-duration' => 'Vervaltijd:',
-            'due-duration-day' => ':due-duration Dag',
-            'due-duration-days' => ':due-duration dagen',
-            'invoice-slip-design' => 'Invoice Slip Design',
-            'logo' => 'Logo',
+            'minimum-order' => 'Minimum Order Settings',
+            'minimum-order-amount' => 'Minimum Order Amount',
             'default' => 'Standaard',
             'sandbox' => 'Sandbox',
             'all-channels' => 'Alles',
             'all-locales' => 'Alles',
+            'invoice-slip-design' => 'Invoice Slip Design',
+            'logo' => 'Logo',
             'storefront' => 'Storefront',
-            'default-list-mode' => 'Standaard product weergavemodus',
-            'grid' => 'Raster',
-            'list' => 'Lijst',
-            'products-per-page' => 'Producten per pagina',
-            'sort-by' => 'Sorteer op',
-            'from-z-a' => 'Van Z-A',
-            'from-a-z' => 'Van A-Z',
-            'newest-first' => 'Nieuwste eerst',
-            'oldest-first' => 'Oudste eerst',
-            'cheapest-first' => 'Goedkoopste eerst',
+            'default-list-mode' => 'Default List Mode',
+            'grid' => 'Grid',
+            'list' => 'List',
+            'products-per-page' => 'Products Per Page',
+            'sort-by' => 'Sort By',
+            'from-z-a' => 'From Z-A',
+            'from-a-z' => 'From A-Z',
+            'newest-first' => 'Newest First',
+            'oldest-first' => 'Oldest First',
+            'cheapest-first' => 'Cheapest First',
             'expensive-first' => 'Expensive First',
             'comma-seperated' => 'Comma Seperated',
             'favicon' => 'Favicon',
@@ -1483,7 +1439,7 @@ return [
             'show-sku' => 'Show SKU',
             'show-search-input-field' => 'Show Search Input Field',
             'store-name' => 'Winkel naam',
-            'vat-number' => 'BTW-nummer',
+            'vat-number' => 'Btw-nummer',
             'contact-number' => 'Contact nummer',
             'bank-details' => 'Bankgegevens',
             'mailing-address' => 'Send Check to',
@@ -1498,16 +1454,7 @@ return [
             'client-secret-info' => 'Add your secret key here',
             'accepted-currencies' => 'Accepted currencies',
             'accepted-currencies-info' => 'Add currency code comma seperated e.g. USD,INR,...',
-            'buy-now-button-display' => 'Allow customers to directly buy products',
-            'width' => 'Width',
-            'height' => 'Height',
-            'cache-small-image' => 'Small Image',
-            'cache-medium-image' => 'Medium Image',
-            'cache-large-image' => 'Large Image',
-            'generate-invoice'   => 'Automatically generate the invoice after placing an order',
-            'set-invoice-status' => 'Set the invoice status after creating the invoice to',
-            'set-order-status'   => 'Set the order status after creating the invoice to',
-            'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled'
+            'buy-now-button-display' => 'Allow customers to directly buy products'
         ]
     ]
 ];

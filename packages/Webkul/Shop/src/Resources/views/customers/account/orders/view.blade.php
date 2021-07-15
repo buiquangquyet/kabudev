@@ -21,11 +21,7 @@
 
 
                 @if ($order->canCancel())
-                    <form id="cancelOrderForm" action="{{ route('customer.orders.cancel', $order->id) }}" method="post">
-                        @csrf
-                    </form>
-
-                    <a href="javascript:void(0);" class="btn btn-lg btn-primary" onclick="cancelOrder('{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}')" style="float: right;">
+                    <a href="{{ route('customer.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('shop::app.customer.account.order.view.cancel-confirm-msg') }}'" style="float: right;">
                         {{ __('shop::app.customer.account.order.view.cancel-btn-title') }}
                     </a>
                 @endif
@@ -198,7 +194,7 @@
 
                                             <tr class="bold">
                                                 <td>{{ __('shop::app.customer.account.order.view.total-due') }}</td>
-
+                                                
                                                 <td>-</td>
 
                                                 @if($order->status !== 'canceled')
@@ -221,7 +217,7 @@
 
                                 <div class="sale-section">
                                     <div class="secton-title">
-                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}</span>
+                                        <span>{{ __('shop::app.customer.account.order.view.individual-invoice', ['invoice_id' => $invoice->id]) }}</span>
 
                                         <a href="{{ route('customer.orders.print', $invoice->id) }}" class="pull-right">
                                             {{ __('shop::app.customer.account.order.view.print') }}
@@ -564,15 +560,3 @@
     </div>
 
 @endsection
-
-@push('scripts')
-    <script>
-        function cancelOrder(message) {
-            if (! confirm(message)) {
-                return;
-            }
-
-            $('#cancelOrderForm').submit();
-        }
-    </script>
-@endpush

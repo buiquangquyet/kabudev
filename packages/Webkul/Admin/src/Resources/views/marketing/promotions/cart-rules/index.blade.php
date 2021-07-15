@@ -6,11 +6,8 @@
 
 @section('content')
     <div class="content">
-        @php
-            $customer_group = core()->getRequestedCustomerGroupCode();
-            $channel = core()->getRequestedChannelCode(false);
-        @endphp
-
+        <?php $customer_group = request()->get('customer_group') ?: null; ?>
+        <?php $channel = request()->get('channel') ?: null; ?>
         <div class="page-header">
             <div class="page-title">
                 <h1>{{ __('admin::app.promotions.cart-rules.title') }}</h1>
@@ -29,7 +26,6 @@
         </div>
     </div>
 @endsection
-
 @push('scripts')
     <script>
         function reloadPage(getVar, getVal) {
@@ -38,5 +34,6 @@
 
             window.location.href = url.href;
         }
+
     </script>
 @endpush

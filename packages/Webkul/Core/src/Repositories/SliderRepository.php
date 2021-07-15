@@ -2,11 +2,10 @@
 
 namespace Webkul\Core\Repositories;
 
-use Carbon\Carbon;
+use Storage;
 use Illuminate\Support\Arr;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\Container as App;
 use Prettus\Repository\Traits\CacheableRepository;
 
@@ -15,7 +14,7 @@ class SliderRepository extends Repository
     use CacheableRepository;
 
     /**
-     * Channel repository instance.
+     * ChannelRepository object
      *
      * @var \Webkul\Core\Repositories\ChannelRepository
      */
@@ -31,14 +30,15 @@ class SliderRepository extends Repository
     public function __construct(
         ChannelRepository $channelRepository,
         App $app
-    ) {
+    )
+    {
         $this->channelRepository = $channelRepository;
 
         parent::__construct($app);
     }
 
     /**
-     * Specify model class name.
+     * Specify Model class name
      *
      * @return mixed
      */
@@ -48,10 +48,8 @@ class SliderRepository extends Repository
     }
 
     /**
-     * Save slider.
-     *
      * @param  array  $data
-     * @return bool|\Webkul\Core\Contracts\Slider
+     * @return \Webkul\Core\Contracts\Slider
      */
     public function save(array $data)
     {
@@ -93,10 +91,7 @@ class SliderRepository extends Repository
     }
 
     /**
-     * Update item.
-     *
      * @param  array  $data
-     * @param  int  $id
      * @return bool
      */
     public function updateItem(array $data, $id)
@@ -139,7 +134,7 @@ class SliderRepository extends Repository
     }
 
     /**
-     * Delete a slider item and delete the image from the disk or where ever it is.
+     * Delete a slider item and delete the image from the disk or where ever it is
      *
      * @param  int  $id
      * @return bool
@@ -153,27 +148,5 @@ class SliderRepository extends Repository
         Storage::delete($sliderItemImage);
 
         return $this->model->destroy($id);
-    }
-
-    /**
-     * Get only active sliders.
-     *
-     * @return array
-     */
-    public function getActiveSliders()
-    {
-        $currentChannel = core()->getCurrentChannel();
-
-        $currentLocale = core()->getCurrentLocale();
-
-        return $this->where('channel_id', $currentChannel->id)
-            ->whereRaw("find_in_set(?, locale)", [$currentLocale->code])
-            ->where(function ($query) {
-                $query->where('expired_at', '>=', Carbon::now()->format('Y-m-d'))
-                    ->orWhereNull('expired_at');
-            })
-            ->orderBy('sort_order', 'ASC')
-            ->get()
-            ->toArray();
     }
 }

@@ -63,8 +63,7 @@ return [
                 'day' => 'Day',
                 'status' => 'Status',
                 'open' => 'Open',
-                'close' => 'Close',
-                'time-error' => 'The to time must be greater than the from time.'
+                'close' => 'Close'
             ]
         ]
     ],
