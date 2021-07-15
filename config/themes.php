@@ -17,10 +17,10 @@ return [
         //     'parent' => 'default'
         // ]
 
-        'velocity' => [
-            'views_path' => 'resources/themes/velocity/views',
-            'assets_path' => 'public/themes/velocity/assets',
-            'name' => 'Velocity',
+        'kabu' => [
+            'views_path' => 'resources/themes/kabu/views',
+            'assets_path' => 'public/themes/kabu/assets',
+            'name' => 'Kabu',
             'parent' => 'default'
         ],
     ],
