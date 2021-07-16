@@ -269,7 +269,7 @@ return [
         Webkul\Checkout\Providers\CheckoutServiceProvider::class,
         Webkul\Shipping\Providers\ShippingServiceProvider::class,
         Webkul\Payment\Providers\PaymentServiceProvider::class,
-        Webkul\Paypal\Providers\PaypalServiceProvider::class,
+        // Webkul\Paypal\Providers\PaypalServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
@@ -281,6 +281,9 @@ return [
         Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
+
+        Kabu\Category\Providers\CategoryServiceProvider::class,
+        Kabu\Product\Providers\ProductServiceProvider::class,
     ],
 
     /*

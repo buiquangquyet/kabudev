@@ -109,7 +109,11 @@
         "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
         "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
         "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
-        "Webkul\\Marketing\\": "packages/Webkul/Marketing/src"
+        "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
+
+        "Kabu\\Category\\": "packages/Kabu/Category/src",
+        "Kabu\\Product\\": "packages/Kabu/Product/src"
+
       }
     },
     "autoload-dev": {
