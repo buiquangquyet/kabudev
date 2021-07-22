@@ -112,7 +112,8 @@
         "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
 
         "Kabu\\Category\\": "packages/Kabu/Category/src",
-        "Kabu\\Product\\": "packages/Kabu/Product/src"
+        "Kabu\\Product\\": "packages/Kabu/Product/src",
+        "Kabu\\Blog\\": "packages/Kabu/Blog/src"
 
       }
     },

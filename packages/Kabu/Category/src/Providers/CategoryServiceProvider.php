@@ -14,23 +14,23 @@ class CategoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        // $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        $this->loadRoutesFrom(__DIR__ . '/../Http/admin-routes.php');
+        // // $this->loadRoutesFrom(__DIR__ . '/../Http/admin-routes.php');
 
-        $this->loadRoutesFrom(__DIR__ . '/../Http/shop-routes.php');
+        // // $this->loadRoutesFrom(__DIR__ . '/../Http/shop-routes.php');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'category');
+        // $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'category');
 
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
-        ], 'public');
+        // $this->publishes([
+        //     __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
+        // ], 'public');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'category');
+        // $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'category');
 
-        Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('category::admin.layouts.style');
-        });
+        // Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
+        //     $viewRenderEventManager->addTemplate('category::admin.layouts.style');
+        // });
     }
 
     /**
@@ -50,12 +50,12 @@ class CategoryServiceProvider extends ServiceProvider
      */
     protected function registerConfig()
     {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/admin-menu.php', 'menu.admin'
-        );
+        // $this->mergeConfigFrom(
+        //     dirname(__DIR__) . '/Config/admin-menu.php', 'menu.admin'
+        // );
 
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/acl.php', 'acl'
-        );
+        // $this->mergeConfigFrom(
+        //     dirname(__DIR__) . '/Config/acl.php', 'acl'
+        // );
     }
 }

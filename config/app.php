@@ -284,6 +284,7 @@ return [
 
         Kabu\Category\Providers\CategoryServiceProvider::class,
         Kabu\Product\Providers\ProductServiceProvider::class,
+        Kabu\Blog\Providers\BlogServiceProvider::class,
     ],
 
     /*
