@@ -10,23 +10,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}"> --}}
 
-    <link rel="stylesheet" href="{{ bagisto_asset('css/shop.css') }}">
+    {{-- <link rel="stylesheet" href="{{ bagisto_asset('css/shop.css') }}"> --}}
+    <link rel="stylesheet" href="{{ bagisto_asset('css/app.css') }}">
 
     @if ($favicon = core()->getCurrentChannel()->favicon_url)
-        <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
+    <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
     @else
-        <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" />
+    <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" />
     @endif
 
     @yield('head')
 
     @section('seo')
-        @if (! request()->is('/'))
-            <meta name="description" content="{{ core()->getCurrentChannel()->description }}"/>
-        @endif
+    @if (! request()->is('/'))
+    <meta name="description" content="{{ core()->getCurrentChannel()->description }}" />
+    @endif
     @show
 
     @stack('css')
@@ -47,7 +47,7 @@
     <div id="app">
         <flash-wrapper ref='flashes'></flash-wrapper>
 
-        <div class="main-container-wrapper">
+        <div class="container">
 
             {!! view_render_event('bagisto.shop.layout.header.before') !!}
 
@@ -111,10 +111,9 @@
             @endif
         @endif
     </script>
-    <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-   
+    <script type="text/javascript" src="{{ bagisto_asset('js/app.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script> --}}
     @stack('scripts')
 
     {!! view_render_event('bagisto.shop.layout.body.after') !!}
@@ -124,9 +123,6 @@
     <script>
         {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
     </script>
-    @env('local')
-    <script src="http://localhost:35729/livereload.js"></script>
-@endenv
 </body>
 
 </html>
