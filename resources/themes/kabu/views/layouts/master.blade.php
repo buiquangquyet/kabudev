@@ -13,7 +13,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}"> --}}
 
     {{-- <link rel="stylesheet" href="{{ bagisto_asset('css/shop.css') }}"> --}}
-    <link rel="stylesheet" href="{{ bagisto_asset(mix('css/app.css')) }}?t={{ microtime() }}">
+    <link rel="stylesheet" href="{{ bagisto_asset('css/app.css') }}">
 
     @if ($favicon = core()->getCurrentChannel()->favicon_url)
     <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
@@ -107,7 +107,7 @@
             @endif
         @endif
     </script> --}}
-    <script type="text/javascript" src="{{ bagisto_asset(mix('js/app.js')) }}?t={{microtime()}}"></script>
+    <script type="text/javascript" src="{{ bagisto_asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script>
     {{-- <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script> --}}
     @stack('scripts')
