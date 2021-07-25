@@ -22,7 +22,7 @@ $light: rgba(176, 176, 176, 0.51);
 // Body
 $body-bg: #fff;
 // $color: #111111;
-// $link-color: #111111;
+$link-color: #111111;
 
 // Typography
 $font-family-sans-serif: "Quicksand", sans-serif;
@@ -70,7 +70,9 @@ ul.slider-images {
 
 .btn-attribute{
     // @extend .btn-outline-light;
-    @extend .mx-2;
+    @extend .lead;
+    @extend .me-4;
+    @extend .px-4;
     @extend .rounded-3;
     @extend .border-2;
     @extend .border-light;
@@ -79,4 +81,22 @@ ul.slider-images {
 
 .btn-check:checked + .btn-attribute, .btn-check:active + .btn-attribute, .btn-attribute:active,  .active.btn-attribute{
     @extend .border-primary;
+}
+.product-attributes .attribute, .product-attributes .quantity, .product-attributes .add-to-buttons, .product-attributes .stock-status{
+    @extend p
+}
+.final-price{
+    font-size: 1rem;
+}
+.product-attributes .final-price{
+    font-size: 2.5rem;
+}
+
+.regular-price{
+    text-decoration: line-through;
+    color: #7B7B7B;
+    @extend .px-2;
+}
+.active{
+    color: red
 }

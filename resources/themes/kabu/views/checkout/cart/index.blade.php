@@ -39,6 +39,7 @@
                         
                         @foreach ($cart->items as $key => $item)
                         @php
+                        // dump($item->toArray());
                             $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
 
                             if (is_null ($item->product->url_key)) {
@@ -66,9 +67,9 @@
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.name.after', ['item' => $item]) !!}
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.options.before', ['item' => $item]) !!}
                                         @if (isset($item->additional['attributes']))
-                                        <div class="item-options col-md-3">
+                                        <div class="item-options">
                                             @foreach ($item->additional['attributes'] as $attribute)
-                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                            {{ $attribute['attribute_name'] }} : <b>{{ $attribute['option_label'] }}</b></br>
                                             @endforeach
                             
                                         </div>
@@ -81,6 +82,11 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.item.price.before', ['item' => $item]) !!}
                                 <div class="price col-md-2">
                                     {{ core()->currency($item->base_price) }}
+                                    @if ($item->product->price>$item->base_price)
+                                    <span class="regular-price">{{core()->currency($item->product->price) }}</span>
+                                    @endif
+                                   
+                                    
                                 </div>
                                 {!! view_render_event('bagisto.shop.checkout.cart.item.price.after', ['item' => $item]) !!}
                             
@@ -117,7 +123,7 @@
                                 </div>
                                 {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.after', ['item' => $item]) !!}
                                 <div class="price col-md-2">
-                                    {{ core()->currency($item->base_price) }}
+                                    {{ core()->currency($item->base_total) }}
                                 </div>
                                 <div class="price col-md-1">
                                     <a href="{{ route('shop.checkout.cart.remove', $item->id) }}"
@@ -147,7 +153,18 @@
                 </div>
                 <div class="col col-md-4 right-side">
                     <div class="rounded-3 border border-3 border-primary"> 
-                        <div class=" p-3">
+                        @auth('customer')
+                        <?php $address = auth('customer')->user()->default_address;
+                        // dump($address->toArray());
+                        ?>
+                        <div class="p-3">
+                            <h6>{{ __('shop::app.checkout.onepage.shipping') }}</h6>
+                            <span>{{$address->first_name}} {{$address->last_name}}</span>  | {{$address->phone}}
+                            <div>{{$address->address1}}, {{$address->state}}, {{$address->city}}</div>
+                        </div>
+                        <div class="section-devider"></div>
+                        @endauth
+                        <div class="p-3">
                             <coupon-component></coupon-component>
                         </div>
                         <div class="section-devider"></div>

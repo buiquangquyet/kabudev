@@ -42,7 +42,6 @@
 
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
     <section class="product-detail">
-        <button type="button" class="btn btn-primary">Primary</button>
         <div class="container">
             {{-- <img src="{{bagisto_asset('images/product-gallery.png')}}" class="img-fluid"> --}}
             <product-view>
@@ -55,7 +54,7 @@
                             <span>{{ $product->name }}</span>
                         </h1>
                         <div class="row">
-                            <div class="col-7">
+                            <div class="col-7 product-attributes">
                                
                                 @include ('shop::products.review', ['product' => $product])
         
@@ -165,7 +164,7 @@
     <script type="text/x-template" id="quantity-changer-template">
         <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
             <label class="required">{{ __('shop::app.products.quantity') }}</label>
-            <span class="quantity-container">
+            <div class="quantity-container">
                 <button type="button" class="decrease" @click="decreaseQty()">-</button>
 
                 <input :name="controlName" class="control" :value="qty" :v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
@@ -173,7 +172,7 @@
                 <button type="button" class="increase" @click="increaseQty()">+</button>
 
                 <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
-            </span>
+            </div>
         </div>
     </script>
 

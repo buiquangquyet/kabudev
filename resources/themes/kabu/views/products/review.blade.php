@@ -7,12 +7,13 @@
         <span class="stars">
             @for ($i = 1; $i <= 5; $i++)
               @if($i <= round($reviewHelper->getAverageRating($product)))
-              <span class="icon star-icon"></span>
+              <span class="fa fa-star"></span>
               @else
-              <span class="icon star-icon-blank"></span>
+              <span class="fa fa-star-o"></span>
               @endif
             @endfor
         </span>
+        ({{ $total }} đánh giá) | xxx đã bán
 
         <div class="total-reviews">
             {{

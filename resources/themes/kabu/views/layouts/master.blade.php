@@ -107,7 +107,7 @@
             @endif
         @endif
     </script> --}}
-    <script type="text/javascript" src="{{ bagisto_asset('js/app.js') }}?t={{microtime()}}"></script>
+    <script type="text/javascript" src="{{ bagisto_asset(mix('js/app.js')) }}?t={{microtime()}}"></script>
     <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script>
     {{-- <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script> --}}
     @stack('scripts')
@@ -119,6 +119,9 @@
     <script>
         {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
     </script>
+        @env('local')
+        <script src="http://localhost:35729/livereload.js"></script>
+    @endenv
 </body>
 
 </html>

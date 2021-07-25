@@ -17,7 +17,7 @@
 
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="required">@{{ attribute.label }}</label>
-                    <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
+                    <div v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
                         <select
                             class="control"
                             v-validate="'required'"
@@ -30,9 +30,9 @@
                             <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
 
                         </select>
-                    </span>
+                    </div>
 
-                    <span class="swatch-container" v-else>
+                    <div class="swatch-container" v-else>
                         <label class="swatch"
                             v-for='(option, index) in attribute.options'
                             v-if="option.id"
@@ -59,7 +59,7 @@
                         </label>
 
                         <span v-if="! attribute.options.length" class="no-options">{{ __('shop::app.products.select-above-options') }}</span>
-                    </span>
+                    </div>
 
                     <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">
                         @{{ errors.first('super_attribute[' + attribute.id + ']') }}

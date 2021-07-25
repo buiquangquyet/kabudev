@@ -5,45 +5,39 @@
 @stop
 
 @section('content-wrapper')
+    <div class="container">
     <checkout></checkout>
+    </div>
 @endsection
 
 @push('scripts')
     @include('shop::checkout.cart.coupon')
 
     <script type="text/x-template" id="checkout-template">
-        <div id="checkout" class="checkout-process">
-            <div class="col-main">
-                <ul class="checkout-steps">
-                    <li class="active" :class="[completed_step >= 0 ? 'active' : '', completed_step > 0 ? 'completed' : '']" @click="navigateToStep(1)">
-                        <div class="decorator address-info"></div>
+        <div id="checkout" class="checkout-process row">
+            <div class="col col-md-8">
+                
+                  <nav aria-label="breadcrumb">
+                <ol class="breadcrumb checkout-steps">
+                    <li class="breadcrumb-item active" :class="[completed_step >= 0 ? 'active' : '', completed_step > 0 ? 'completed' : '']" @click="navigateToStep(1)">
                         <span>{{ __('shop::app.checkout.onepage.information') }}</span>
                     </li>
 
-                    <div class="line mb-25"></div>
-
                     @if ($cart->haveStockableItems())
-                        <li :class="[current_step == 2 || completed_step > 1 ? 'active' : '', completed_step > 1 ? 'completed' : '']" @click="navigateToStep(2)">
-                            <div class="decorator shipping"></div>
+                        <li class="breadcrumb-item" :class="[current_step == 2 || completed_step > 1 ? 'active' : '', completed_step > 1 ? 'completed' : '']" @click="navigateToStep(2)">
                             <span>{{ __('shop::app.checkout.onepage.shipping') }}</span>
                         </li>
-
-                        <div class="line mb-25"></div>
                     @endif
 
-                    <li :class="[current_step == 3 || completed_step > 2 ? 'active' : '', completed_step > 2 ? 'completed' : '']" @click="navigateToStep(3)">
-                        <div class="decorator payment"></div>
+                    <li class="breadcrumb-item" :class="[current_step == 3 || completed_step > 2 ? 'active' : '', completed_step > 2 ? 'completed' : '']" @click="navigateToStep(3)">
                         <span>{{ __('shop::app.checkout.onepage.payment') }}</span>
                     </li>
 
-                    <div class="line mb-25"></div>
-
-                    <li :class="[current_step == 4 ? 'active' : '']">
-                        <div class="decorator review"></div>
+                    <li class="breadcrumb-item" :class="[current_step == 4 ? 'active' : '']">
                         <span>{{ __('shop::app.checkout.onepage.review') }}</span>
                     </li>
-                </ul>
-
+                </ol>
+            </nav>
                 <div class="step-content information" v-show="current_step == 1" id="address-section">
                     @include('shop::checkout.onepage.customer-info')
 
@@ -97,7 +91,7 @@
                 </div>
             </div>
 
-            <div class="col-right" v-show="current_step != 4">
+            <div class="col col-md-4" v-show="current_step != 4">
                 <summary-section :key="summeryComponentKey"></summary-section>
             </div>
         </div>
@@ -437,7 +431,6 @@
         })
 
         var shippingTemplateRenderFns = [];
-
         Vue.component('shipping-section', {
             inject: ['$validator'],
 
@@ -490,7 +483,6 @@
         })
 
         var paymentTemplateRenderFns = [];
-
         Vue.component('payment-section', {
             inject: ['$validator'],
 
@@ -545,7 +537,6 @@
         })
 
         var reviewTemplateRenderFns = [];
-
         Vue.component('review-section', {
             data: function() {
                 return {
@@ -579,7 +570,6 @@
 
 
         var summaryTemplateRenderFns = [];
-
         Vue.component('summary-section', {
             inject: ['$validator'],
 

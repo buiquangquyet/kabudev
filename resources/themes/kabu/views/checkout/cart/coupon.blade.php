@@ -34,13 +34,9 @@
             data: function() {
                 return {
                     coupon_code: '',
-
                     applied_coupon: "{{ $cart->coupon_code }}",
-
                     error_message: '',
-
                     route_name: "{{ request()->route()->getName() }}",
-
                     disable_button: false
                 }
             },
