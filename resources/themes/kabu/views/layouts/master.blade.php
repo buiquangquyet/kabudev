@@ -13,7 +13,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}"> --}}
 
     {{-- <link rel="stylesheet" href="{{ bagisto_asset('css/shop.css') }}"> --}}
-    <link rel="stylesheet" href="{{ bagisto_asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ bagisto_asset(mix('css/app.css')) }}?t={{ microtime() }}">
 
     @if ($favicon = core()->getCurrentChannel()->favicon_url)
     <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
@@ -47,16 +47,12 @@
     <div id="app">
         <flash-wrapper ref='flashes'></flash-wrapper>
 
-        <div class="container">
-
             {!! view_render_event('bagisto.shop.layout.header.before') !!}
-
             @include('shop::layouts.header.index')
-
             {!! view_render_event('bagisto.shop.layout.header.after') !!}
-
-            @yield('slider')
-
+            <div class="container">
+                @yield('slider')
+            </div>
             <main class="content-container">
 
                 {!! view_render_event('bagisto.shop.layout.content.before') !!}
@@ -76,15 +72,15 @@
         {!! view_render_event('bagisto.shop.layout.footer.after') !!}
 
         @if (core()->getConfigData('general.content.footer.footer_toggle'))
-            <div class="footer">
-                <p style="text-align: center;">
-                    @if (core()->getConfigData('general.content.footer.footer_content'))
-                        {{ core()->getConfigData('general.content.footer.footer_content') }}
-                    @else
-                        {!! trans('admin::app.footer.copy-right') !!}
-                    @endif
-                </p>
-            </div>
+        <div class="footer">
+            <p style="text-align: center;">
+                @if (core()->getConfigData('general.content.footer.footer_content'))
+                {{ core()->getConfigData('general.content.footer.footer_content') }}
+                @else
+                {!! trans('admin::app.footer.copy-right') !!}
+                @endif
+            </p>
+        </div>
         @endif
 
         <overlay-loader :is-open="show_loader"></overlay-loader>
@@ -110,9 +106,9 @@
                 window.serverErrors = @json($errors->getMessages());
             @endif
         @endif
-    </script>
-    <script type="text/javascript" src="{{ bagisto_asset('js/app.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script> --}}
+    </script> --}}
+    <script type="text/javascript" src="{{ bagisto_asset('js/app.js') }}?t={{microtime()}}"></script>
+    <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script>
     {{-- <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script> --}}
     @stack('scripts')
 

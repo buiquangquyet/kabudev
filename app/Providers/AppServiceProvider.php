@@ -15,6 +15,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $this->app->concord->registerModel(
+            \Webkul\Product\Contracts\Product::class, \Kabu\Product\Models\Product::class
+        );
+        $this->app->concord->registerModel(
+            \Webkul\Product\Contracts\ProductFlat::class, \Kabu\Product\Models\ProductFlat::class
+        );
     }
 
     /**

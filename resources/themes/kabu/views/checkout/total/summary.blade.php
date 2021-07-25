@@ -1,5 +1,5 @@
 <div class="order-summary">
-    <h3>{{ __('shop::app.checkout.total.order-summary') }}</h3>
+    {{-- <h3>{{ __('shop::app.checkout.total.order-summary') }}</h3> --}}
 
     <div class="item-detail">
         <label>

@@ -1,8 +1,82 @@
+// $theme-colors: () !default;
+
+$primary: #0074d9;
+$danger: #ff4136;
+$light: rgba(176, 176, 176, 0.51);
+
+
+// $theme-colors: map-merge(
+//   (
+//     "primary":    $primary,
+//     // "secondary":  $secondary,
+//     // "success":    $success,
+//     // "info":       $info,
+//     // "warning":    $warning,
+//     // "danger":     $danger,
+//     "light":      $light,
+//     // "dark":       $dark
+//   ),
+//   $theme-colors
+// );
 
 // Body
-$body-bg: #f5f8fa;
+$body-bg: #fff;
+// $color: #111111;
+// $link-color: #111111;
 
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: "Quicksand", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+.header {
+    background-image: url('../../../public/themes/kabu/assets/images/bg_header.png');
+}
+.section-devider{
+    height: 8px;
+    background-color: #E2F0FF;
+    margin: 30px 0;
+}
+
+.main-navbar {
+    font-size: 24px;
+    font-weight: 500 !important;
+}
+
+.main-navbar a {
+    color: #111111 !important;
+}
+
+ul.slider-images {
+    list-style-type: none;
+    padding: 0;
+}
+.stars .fa {
+    color:#FFC738
+}
+.review .by{
+    font-weight: bold;
+}
+.cart-content {
+    background-color: #E2F0FF;
+    @extend .p-4, .rounded-3;
+}
+.cart-content .item{
+    background-color: #fff;
+    @extend .p-3;
+    @extend .rounded-3;
+    @extend .mb-3;
+}
+
+.btn-attribute{
+    // @extend .btn-outline-light;
+    @extend .mx-2;
+    @extend .rounded-3;
+    @extend .border-2;
+    @extend .border-light;
+    // color: $primary-color !important;
+}
+
+.btn-check:checked + .btn-attribute, .btn-check:active + .btn-attribute, .btn-attribute:active,  .active.btn-attribute{
+    @extend .border-primary;
+}

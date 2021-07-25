@@ -1,8 +1,12 @@
-<div class="footer">
-    <div class="footer-content">
-        <div class="footer-list-container">
-
-            <?php
+<footer>
+    <div class="container">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 link-secondary">Trang chủ</a></li>
+            <li class="dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategoryFooter"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản phẩm
+                </a>
+                <?php
                 $categories = [];
 
                 foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id) as $category){
@@ -10,82 +14,48 @@
                         array_push($categories, $category);
                 }
             ?>
-
-            @if (count($categories))
-                <div class="list-container">
-                    <span class="list-heading">Categories</span>
-
-                    <ul class="list-group">
-                        @foreach ($categories as $key => $category)
-                            <li>
-                                <a href="{{ route('shop.productOrCategory.index', $category->slug) }}">{{ $category->name }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            {!! DbView::make(core()->getCurrentChannel())->field('footer_content')->render() !!}
-
-            <div class="list-container">
-                @if(core()->getConfigData('customer.settings.newsletter.subscription'))
-                    <label class="list-heading" for="subscribe-field">{{ __('shop::app.footer.subscribe-newsletter') }}</label>
-                    <div class="form-container">
-                        <form action="{{ route('shop.subscribe') }}">
-                            <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
-                                <input type="email" id="subscribe-field" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
-
-                                <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
-                            </div>
-                        </form>
-                    </div>
+                @if (count($categories))
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategoryFooter">
+                    @foreach ($categories as $key => $category)
+                    <li>
+                        <a href="{{ route('shop.productOrCategory.index', $category->slug) }}"
+                            class="dropdown-item">{{ $category->name }}</a>
+                    </li>
+                    @endforeach
+                </ul>
                 @endif
+            </li>
+            <li><a href="#" class="nav-link px-2 link-dark">Về chúng tôi</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">Liên hệ</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">Blog</a></li>
+        </ul>
+    </div>
 
-                <?php
-                    $term = request()->input('term');
+    <div class="section-devider"></div>
 
-                    if (! is_null($term)) {
-                        $serachQuery = 'term='.request()->input('term');
-                    }
-                ?>
-
-                <label class="list-heading" for="locale-switcher">{{ __('shop::app.footer.locale') }}</label>
-                <div class="form-container">
-                    <div class="control-group">
-                        <select class="control locale-switcher" id="locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
-
-                            @foreach (core()->getCurrentChannel()->locales as $locale)
-                                @if (isset($serachQuery))
-                                    <option value="?{{ $serachQuery }}&locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
-                                @else
-                                    <option value="?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
-                                @endif
-                            @endforeach
-
-                        </select>
-                    </div>
-                </div>
-
-                <div class="currency">
-                    <label class="list-heading" for="currency-switcher">{{ __('shop::app.footer.currency') }}</label>
-                    <div class="form-container">
-                        <div class="control-group">
-                            <select class="control locale-switcher" id="currency-switcher" onchange="window.location.href = this.value">
-
-                                @foreach (core()->getCurrentChannel()->currencies as $currency)
-                                    @if (isset($serachQuery))
-                                        <option value="?{{ $serachQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
-                                    @else
-                                        <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
-                                    @endif
-                                @endforeach
-
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                {!! DbView::make(core()->getCurrentChannel())->field('footer_content')->render() !!}
             </div>
+            <div class="col-md-5">
+                @if(core()->getConfigData('customer.settings.newsletter.subscription'))
+                <label class="list-heading"
+                    for="subscribe-field">{{ __('shop::app.footer.subscribe-newsletter') }}</label>
+                <div class="form-container">
+                    <form action="{{ route('shop.subscribe') }}">
+                        <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
+                            <input type="email" id="subscribe-field" class="control subscribe-field"
+                                name="subscriber_email" placeholder="Email Address" required><br />
+
+                            <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
+                        </div>
+                    </form>
+                </div>
+                @endif
+            </div>
+
+
         </div>
     </div>
-</div>
+</footer>

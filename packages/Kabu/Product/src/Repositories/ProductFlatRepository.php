@@ -16,8 +16,11 @@ class ProductFlatRepository extends Repository
         return 'Webkul\Product\Contracts\Product';
     }
 
-    function getHomeProductByCategory($category)
+    function getHomeProductByCategory($category, $count = false)
     {
-        return app('Webkul\Product\Repositories\ProductFlatRepository')->categoryProductQuerybuilder($category)->limit(6)->get();
+       
+        if ($count == false)
+            $count = core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage');
+        return app('Webkul\Product\Repositories\ProductFlatRepository')->categoryProductQuerybuilder($category)->limit($count)->get();
     }
 }

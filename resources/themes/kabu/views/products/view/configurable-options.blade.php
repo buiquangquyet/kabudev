@@ -17,7 +17,6 @@
 
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="required">@{{ attribute.label }}</label>
-
                     <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
                         <select
                             class="control"
@@ -40,7 +39,7 @@
                             :data-id="option.id"
                             :for="['attribute_' + attribute.id + '_option_' + option.id]">
 
-                            <input type="radio"
+                            <input type="radio" class="btn-check"
                                 v-validate="'required'"
                                 :name="['super_attribute[' + attribute.id + ']']"
                                 :id="['attribute_' + attribute.id + '_option_' + option.id]"
@@ -48,13 +47,14 @@
                                 :data-vv-as="'&quot;' + attribute.label + '&quot;'"
                                 @change="configure(attribute, $event.target.value)"/>
 
+
                             <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
 
                             <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
 
-                            <span v-if="attribute.swatch_type == 'text'">
+                            <label class="btn btn-attribute" v-if="attribute.swatch_type == 'text'" :for="['attribute_' + attribute.id + '_option_' + option.id]">
                                 @{{ option.label }}
-                            </span>
+                            </label>
 
                         </label>
 

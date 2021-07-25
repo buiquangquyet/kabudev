@@ -2,7 +2,7 @@
 
 {!! view_render_event('bagisto.shop.products.list.toolbar.before') !!}
 
-<div class="top-toolbar mb-35">
+<div class="text-end top-toolbar mb-35">
 
     <div class="page-info">
         <span>
@@ -17,7 +17,7 @@
 
     <div class="pager">
 
-        <div class="view-mode">
+        {{-- <div class="view-mode">
             @if ($toolbarHelper->isModeActive('grid'))
                 <span class="grid-view">
                     <i class="icon grid-view-icon"></i>
@@ -37,7 +37,7 @@
                     <i class="icon list-view-icon"></i>
                 </a>
             @endif
-        </div>
+        </div> --}}
 
         <div class="sorter">
             <label for="sort-by-toolbar">{{ __('shop::app.products.sort-by') }}</label>
@@ -55,7 +55,7 @@
             </select>
         </div>
 
-        <div class="limiter">
+        {{-- <div class="limiter">
             <label for="show-toolbar">{{ __('shop::app.products.show') }}</label>
 
             <select onchange="window.location.href = this.value" id="show-toolbar">
@@ -69,7 +69,7 @@
                 @endforeach
 
             </select>
-        </div>
+        </div> --}}
 
     </div>
 

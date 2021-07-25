@@ -1,1 +1,1 @@
-<h4>Tải App của chúng tôi</h4>
+<img src="{{bagisto_asset('images/app.png')}}" class="img-fluid">

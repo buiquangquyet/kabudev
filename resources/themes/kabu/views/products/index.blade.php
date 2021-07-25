@@ -19,19 +19,19 @@
 @section('content-wrapper')
     @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 
-    <div class="main">
+    <div class="container">
         {!! view_render_event('bagisto.shop.products.index.before', ['category' => $category]) !!}
 
         <div class="category-container">
 
-            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+            {{-- @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                 @include ('shop::products.list.layered-navigation')
-            @endif
+            @endif --}}
 
             <div class="category-block" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
                 <div class="hero-image mb-35">
                     @if (!is_null($category->image))
-                        <img class="logo" src="{{ $category->image_url }}" alt="" />
+                        <img class="img-fluid" src="{{ $category->image_url }}" alt="" />
                     @endif
                 </div>
 
@@ -43,6 +43,8 @@
                     @endif
                 @endif
 
+                @include ('shop::home.policy')
+
                 @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                     <?php $products = $productRepository->getAll($category->id); ?>
 
@@ -53,7 +55,7 @@
                         @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
                         @if ($toolbarHelper->getCurrentMode() == 'grid')
-                            <div class="product-grid-3">
+                            <div class="row row-cols-1 row-cols-md-4 g-4 pt-3">
                                 @foreach ($products as $productFlat)
 
                                     @include ('shop::products.list.card', ['product' => $productFlat])
@@ -91,10 +93,14 @@
                     @endif
                 @endif
             </div>
-        </div>
 
+        </div>
+        <hr/>
+        @include ('shop::products.list.category-other')
+        
         {!! view_render_event('bagisto.shop.products.index.after', ['category' => $category]) !!}
     </div>
+    @include ('shop::home.app')
 @stop
 
 @push('scripts')

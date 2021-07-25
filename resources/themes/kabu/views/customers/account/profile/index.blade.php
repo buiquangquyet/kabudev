@@ -8,7 +8,7 @@
 
 <div class="account-content">
 
-    @include('shop::customers.account.partials.sidemenu')
+    {{-- @('shop::customers.account.partials.sidemenu') --}}
 
     <div class="account-layout">
 

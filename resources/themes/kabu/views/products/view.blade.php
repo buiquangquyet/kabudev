@@ -41,37 +41,63 @@
 @section('content-wrapper')
 
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
-
     <section class="product-detail">
-
-        <div class="layouter">
+        <button type="button" class="btn btn-primary">Primary</button>
+        <div class="container">
+            {{-- <img src="{{bagisto_asset('images/product-gallery.png')}}" class="img-fluid"> --}}
             <product-view>
+                <div class="row">
+                    <div class="col-5">
+                        @include ('shop::products.view.gallery')
+                    </div>
+                    <div class="col-7">
+                        <h1 class="product-heading">
+                            <span>{{ $product->name }}</span>
+                        </h1>
+                        <div class="row">
+                            <div class="col-7">
+                               
+                                @include ('shop::products.review', ['product' => $product])
+        
+                                @include ('shop::products.price', ['product' => $product])
+        
+                                @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
+                                    <div class="regular-price">
+                                        @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
+                                            <p> {{ $offers }} </p>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                @include ('shop::products.view.configurable-options')
+
+                                @include ('shop::products.view.downloadable')
+
+                                @include ('shop::products.view.grouped-products')
+
+                                @include ('shop::products.view.bundle-options')
+
+                                @include ('shop::products.view.stock', ['product' => $product])
+        
+                                {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+                                @if ($product->getTypeInstance()->showQuantityBox())
+                                    <quantity-changer></quantity-changer>
+                                @else
+                                    <input type="hidden" name="quantity" value="1">
+                                @endif
+                                {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+                                @include ('shop::products.view.product-add')
+                            </div>
+                            <div class="col-5">
+                                @include ('shop::home.policy')
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
                 <div class="form-container">
                     @csrf()
-
                     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-
-                    @include ('shop::products.view.gallery')
-
                     <div class="details">
-
-                        <div class="product-heading">
-                            <span>{{ $product->name }}</span>
-                        </div>
-
-                        @include ('shop::products.review', ['product' => $product])
-
-                        @include ('shop::products.price', ['product' => $product])
-
-                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
-                            <div class="regular-price">
-                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
-                                    <p> {{ $offers }} </p>
-                                @endforeach
-                            </div>
-                        @endif
-
-                        @include ('shop::products.view.stock', ['product' => $product])
 
                         {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
 
@@ -80,59 +106,49 @@
                         </div>
 
                         {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
-
-
-                        {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                        @if ($product->getTypeInstance()->showQuantityBox())
-                            <quantity-changer></quantity-changer>
-                        @else
-                            <input type="hidden" name="quantity" value="1">
-                        @endif
-
-                        {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                        @include ('shop::products.view.configurable-options')
-
-                        @include ('shop::products.view.downloadable')
-
-                        @include ('shop::products.view.grouped-products')
-
-                        @include ('shop::products.view.bundle-options')
-
-                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
-
-                        <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
-                            <div slot="header">
-                                {{ __('shop::app.products.description') }}
-                                <i class="icon expand-icon right"></i>
-                            </div>
-
-                            <div slot="body">
-                                <div class="full-description">
-                                    {!! $product->description !!}
-                                </div>
-                            </div>
-                        </accordian>
-
-                        {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
-
-                        @include ('shop::products.view.attributes')
-
-                        @include ('shop::products.view.reviews')
                     </div>
                 </div>
             </product-view>
         </div>
-
-        @include ('shop::products.view.related-products')
-
+        <div class="section-devider"></div>
+        <div class="container">
+            @include ('shop::products.view.related-products')
+        </div>
+        <div class="section-devider"></div>
+        <div class="container">
         @include ('shop::products.view.up-sells')
+
+        @include ('shop::products.view.attributes')
+        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+        <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
+            <div slot="header">
+                {{ __('shop::app.products.description') }}
+                <i class="icon expand-icon right"></i>
+            </div>
+
+            <div slot="body">
+                <div class="full-description">
+                    {!! $product->description !!}
+                </div>
+            </div>
+        </accordian>
+
+        {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
+
+        </div>
+        <div class="section-devider"></div>
+        <div class="container">
+            @include ('shop::products.view.reviews')
+        </div>
+        
 
     </section>
 
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
-@endsection
+
+    @include ('shop::home.app')
+
+    @endsection
 
 @push('scripts')
 
@@ -268,31 +284,31 @@
             if (thumbList && productHeroImage) {
 
                 for(let i=0; i < thumbFrame.length ; i++) {
-                    thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-                    thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
+                    // thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
+                    // thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
                 }
 
                 if (screen.width > 720) {
-                    thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
-                    thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
-                    thumbList.style.height = productHeroImage.offsetHeight + "px";
+                    // thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
+                    // thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
+                    // thumbList.style.height = productHeroImage.offsetHeight + "px";
                 }
             }
 
             window.onresize = function() {
-                if (thumbList && productHeroImage) {
+                // if (thumbList && productHeroImage) {
 
-                    for(let i=0; i < thumbFrame.length; i++) {
-                        thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-                        thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
-                    }
+                //     for(let i=0; i < thumbFrame.length; i++) {
+                //         thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
+                //         thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
+                //     }
 
-                    if (screen.width > 720) {
-                        thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
-                        thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
-                        thumbList.style.height = productHeroImage.offsetHeight + "px";
-                    }
-                }
+                //     if (screen.width > 720) {
+                //         thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
+                //         thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
+                //         thumbList.style.height = productHeroImage.offsetHeight + "px";
+                //     }
+                // }
             }
         };
     </script>

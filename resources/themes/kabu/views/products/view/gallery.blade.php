@@ -18,8 +18,6 @@
 
     <product-gallery></product-gallery>
 
-    @include ('shop::products.view.product-add')
-
 </div>
 
 {!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
@@ -29,26 +27,7 @@
     <script type="text/x-template" id="product-gallery-template">
         <div>
 
-            <ul class="thumb-list">
-                <li class="gallery-control top" @click="moveThumbs('top')" v-if="(thumbs.length > 4) && this.is_move.up">
-                    <span class="overlay"></span>
-                    <i class="icon arrow-up-white-icon"></i>
-                </li>
-
-                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
-                    <video v-if="thumb.type == 'video'" width="100%" height="100%" onclick="this.paused ? this.play() : this.pause();">
-                        <source :src="thumb.video_url" type="video/mp4">
-                        {{ __('admin::app.catalog.products.not-support-video') }}
-                    </video>
-
-                    <img v-else  :src="thumb.small_image_url" alt=""/>
-                </li>
-
-                <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
-                    <span class="overlay"></span>
-                    <i class="icon arrow-down-white-icon"></i>
-                </li>
-            </ul>
+            
 
             <div class="product-hero-image" id="product-hero-image">
                 <video :key="currentVideoUrl" v-if="currentType == 'video'" width="100%" height="100%" controls>
@@ -69,7 +48,26 @@
                     @endif
                 @endauth
             </div>
+            <ul class="thumb-list">
+                <li class="gallery-control top" @click="moveThumbs('top')" v-if="(thumbs.length > 4) && this.is_move.up">
+                    <span class="overlay"></span>
+                    <i class="icon arrow-up-white-icon"></i>
+                </li>
 
+                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
+                    <video v-if="thumb.type == 'video'" width="100%" height="100%" onclick="this.paused ? this.play() : this.pause();">
+                        <source :src="thumb.video_url" type="video/mp4">
+                        {{ __('admin::app.catalog.products.not-support-video') }}
+                    </video>
+
+                    <img v-else  :src="thumb.small_image_url" alt=""/>
+                </li>
+
+                <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
+                    <span class="overlay"></span>
+                    <i class="icon arrow-down-white-icon"></i>
+                </li>
+            </ul>
         </div>
     </script>
 
