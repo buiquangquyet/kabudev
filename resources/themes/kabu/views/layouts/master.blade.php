@@ -120,7 +120,7 @@
         {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
     </script>
         @env('local')
-        <script src="http://localhost:35729/livereload.js"></script>
+{{--        <script src="http://localhost:35729/livereload.js"></script>--}}
     @endenv
 </body>
 

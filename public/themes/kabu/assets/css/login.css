@@ -1,0 +1,54 @@
+.kabu{}
+.kabu .image-login{
+    width: 100%;
+}
+.kabu .login-text{
+    width: 346px;
+    height: 21px;
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 21px;
+    color: #111111;
+}
+.kabu .input-login{
+    padding-bottom: 25px;
+}
+.kabu .input-login input{
+    background: #fff;
+    border: 2px solid #c7c7c7;
+    border-radius: 10px;
+    width: 100%;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: .2s cubic-bezier(.4,0,.2,1);
+    padding: 0 10px;
+    font-size: 15px;
+    padding: 10px;
+    line-height: 20px;
+    background: transparent;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.kabu .input-login input::placeholder{
+    width: 148px;
+    height: 21px;
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 21px;
+    color: #939393;
+}
+.kabu .input-login span.control-error{
+    float: left;
+}
+.kabu .input-login .forgot-password-link .forgot-link{
+    float: right;
+}
+.kabu .input-login .submit-btn{
+
+}

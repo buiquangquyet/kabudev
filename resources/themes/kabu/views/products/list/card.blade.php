@@ -11,9 +11,9 @@
 
         <div class="product-image">
             <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
-                <img 
+                <img
                 {{-- src="{{ $productBaseImage['medium_image_url'] }}" --}}
-                src="{{ bagisto_asset('images/product.png') }}"
+                src="{{ $productBaseImage['medium_image_url'] }}"
                 class="card-img-top"
                 onerror="this.src='{{ asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png') }}'"
                 alt="" height="207" />
