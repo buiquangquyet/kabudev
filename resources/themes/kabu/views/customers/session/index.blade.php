@@ -36,8 +36,6 @@
                     <form method="POST" action="{{ route('customer.session.create') }}" @submit.prevent="onSubmit">
                         {{ csrf_field() }}
                         <div class="login-form">
-
-
                             <div class="control-group input-login" :class="[errors.has('email') ? 'has-error' : '']">
                                 <label for="email" class="required"></label>
                                 <input type="text" class="control" name="email" placeholder="Tên tài khoản" v-validate="'required|email'" value="{{ old('email') }}" data-vv-as="&quot;{{ __('shop::app.customer.login-form.email') }}&quot;">
@@ -50,8 +48,9 @@
                                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                             </div>
 
-                            <div class="forgot-password-link">
-                                <a class="forgot-link" href="{{ route('customer.forgot-password.create') }}">Quên mật khẩu</a>
+                            <input class="btn btn-primary btn-lg btn-block submit-btn" type="submit" value="Tiếp Tục">
+                            <div class="forgot-password-link float-right p-3">
+                                <a class="forgot-link" href="{{ route('customer.forgot-password.create') }}">Quên mật khẩu?</a>
 
                                 <div class="mt-10">
                                     @if (Cookie::has('enable-resend'))
@@ -62,10 +61,8 @@
                                 </div>
                             </div>
 
-                            <input class="btn btn-primary btn-lg btn-block submit-btn" type="submit" value="Tiếp Tục">
-
-{{--                            {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}--}}
-{{--                            {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}--}}
+                            {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
+                            {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
                         </div>
                     </form>
                 </div>
