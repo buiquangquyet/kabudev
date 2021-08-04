@@ -70,9 +70,30 @@
 }
 
 .kabu .login-form .social-login-links .control-group {
-    width: 50px!important;
-    height: 50px!important;
 }
 
 .kabu .login-form .social-login-links .control-group .link {
+}
+
+.kabu .login-form .social-login-links{
+    text-align: center;
+}
+.kabu .login-form .social-login-links .content-list-item{
+    margin: 0 auto;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+.kabu .login-form .social-login-links .content-list-item .control-group{
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+}
+.kabu .login-form .social-login-links .content-list-item .link-social{}
+.kabu .login-form .social-login-links .content-list-item .link-social span{
+    width: 100%;
+    height: 100%;
+}
+.clear{
+    clear: both;
 }

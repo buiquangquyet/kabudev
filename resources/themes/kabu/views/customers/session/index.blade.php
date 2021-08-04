@@ -60,6 +60,7 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="clear"></div>
 
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
